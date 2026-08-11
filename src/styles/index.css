@@ -1,0 +1,360 @@
+@import 'tailwindcss';
+
+/* Fontlar — self-hosted, dış CDN yok.
+   Türkçe glifler (ı İ ğ Ğ ş Ş) latin-ext alt kümesindedir; fontsource
+   unicode-range ile böler, tarayıcı sadece gerekli parçayı indirir. */
+@import '@fontsource-variable/cormorant/wght.css';
+@import '@fontsource-variable/jost/wght.css';
+
+/* İtalik kesimler bilinçli olarak YÜKLENMİYOR.
+   Türkçe için latin + latin-ext alt kümeleri gerekiyor ve italik bunları
+   ikiye katlıyor: sırf birkaç dekoratif "&" işareti için ~70 KB. Tarayıcının
+   sentetik eğimi bu kullanım için fazlasıyla yeterli. */
+
+/* ═══════════════════════════════════════════════════════════════════════
+   TASARIM TOKEN'LARI — Fildişi & Şampanya
+   ─────────────────────────────────────────────────────────────────────
+   Token isimleri ROL tabanlı: `paper` (zemin), `ink` (metin), `gold`
+   (aksan). Bilinçli tercih — önceki koyu temada isimler renge gömülüydü
+   (`void`, `ivory`) ve açık temaya geçince `text-ivory`'nin "kömür grisi"
+   anlamına gelmesi kalıcı bir tuzak olurdu.
+   ═══════════════════════════════════════════════════════════════════════ */
+@theme {
+  /* — Zemin — */
+  --color-paper: #faf7f2; /* sayfa zemini, sıcak fildişi */
+  --color-paper-deep: #f2ede5; /* gradyanın koyu ucu */
+  --color-card: #ffffff; /* kart yüzeyi */
+
+  /*
+   * — Metin —
+   * Değerler fildişi zemine (#FAF7F2) karşı kontrast oranına göre seçildi;
+   * "güzel görünen" bir gri seçip geçmedik. Koyu temada kolayca kurtardığımız
+   * soluk tonlar açık zeminde okunmaz hâle geliyor.
+   */
+  --color-ink: #2b2724; /* ana metin — 13.4:1 */
+  --color-ink-dim: #6e655e; /* ikincil metin — 5.2:1 */
+  --color-ink-faint: #7e746c; /* küçük dekoratif etiket — 4.3:1 */
+
+  /*
+   * — Aksan —
+   * İKİ FARKLI ALTIN, bilinçli olarak.
+   * `--color-gold` (#B8912F) fildişi üzerinde yalnızca 2.7:1 kontrast verir:
+   * çizgi, kenarlık, ikon ve büyük başlık için harika, ama küçük metin için
+   * WCAG'in istediği 4.5:1'in çok altında. Küçük metinlerde (bölüm etiketleri,
+   * ipuçları) `--color-gold-deep` kullanılır — 5.6:1.
+   */
+  --color-gold: #b8912f; /* dekoratif aksan — çizgi, kenar, ikon */
+  --color-gold-lit: #e0be63; /* parlama / highlight */
+  --color-gold-deep: #7c5f1a; /* gölge + KÜÇÜK METİN — 5.6:1 */
+
+  /* — Tipografi — */
+  --font-display: 'Cormorant Variable', Cormorant, 'Cormorant Garamond', Georgia,
+    'Times New Roman', serif;
+  --font-body: 'Jost Variable', Jost, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, sans-serif;
+
+  /* Akışkan ölçek — mobilde okunur, masaüstünde görkemli.
+     Alt sınırlar 375px ekrana, üst sınırlar ~1440px'e göre ayarlı. */
+  --text-hero: clamp(2.75rem, 13vw, 8rem);
+  --text-hero--line-height: 0.95;
+  --text-display: clamp(2rem, 8.5vw, 4.5rem);
+  --text-display--line-height: 1.05;
+  --text-title: clamp(1.5rem, 6vw, 2.75rem);
+  --text-title--line-height: 1.15;
+  --text-lead: clamp(1.0625rem, 4vw, 1.375rem);
+  --text-lead--line-height: 1.6;
+  --text-body: clamp(1rem, 3.6vw, 1.0625rem);
+  --text-body--line-height: 1.7;
+  --text-eyebrow: clamp(0.6875rem, 2.8vw, 0.8125rem);
+  --text-eyebrow--line-height: 1.4;
+
+  /* — Hareket — */
+  --ease-silk: cubic-bezier(0.22, 1, 0.36, 1); /* yumuşak çıkış */
+  --ease-velvet: cubic-bezier(0.65, 0, 0.35, 1); /* simetrik */
+  --ease-lift: cubic-bezier(0.34, 1.56, 0.64, 1); /* hafif yaylanma */
+
+  /* — Yüzey — */
+  --radius-card: 1.25rem;
+  /* Açık zeminde gölge yumuşak ve sıcak olmalı; nötr siyah gölge fildişi
+     kağıdın üstünde gri ve kirli durur. */
+  --shadow-lift: 0 1.25rem 3rem -1.25rem rgb(43 39 36 / 0.22);
+  --shadow-card: 0 2px 18px -6px rgb(43 39 36 / 0.12);
+}
+
+/* Dokunmatik cihazları hedeflemek için — hover'ı olmayan her şey */
+@custom-variant touch (@media (hover: none));
+/* Gerçek imleci olan cihazlar (özel cursor, manyetik buton vb.) */
+@custom-variant pointer-fine (@media (hover: hover) and (pointer: fine));
+
+/* ═══════════════════════════════════════════════════════════════════════
+   TEMEL KATMAN
+   ═══════════════════════════════════════════════════════════════════════ */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    /* iOS Safari yatay çevrildiğinde metni şişirmesin */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-behavior: auto; /* yumuşak kaydırmayı Lenis yönetir */
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    /* 3B sahne yüklenene kadar (ve WebGL yokken) doğru zemin.
+       Canvas'ın kendi arka planıyla aynı gradyan — geçiş görünmez. */
+    background-color: var(--color-paper);
+    background-image: radial-gradient(
+      120% 90% at 50% 38%,
+      #fffdf8 0%,
+      #faf7f2 45%,
+      #efe8dc 100%
+    );
+    background-attachment: fixed;
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    font-synthesis-weight: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* Mobilde aşağı çekince sayfa yenilenmesin, yatay kayma olmasın */
+    overscroll-behavior-y: none;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  p {
+    text-wrap: pretty;
+    margin: 0;
+  }
+
+  /* Klavye ile gezinenler için görünür altın odak halkası */
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-gold) 28%, transparent);
+    color: var(--color-ink);
+  }
+
+  /* Video ve görsellerin taşmasını engelle */
+  img,
+  video,
+  canvas {
+    display: block;
+    max-width: 100%;
+  }
+
+  button,
+  summary {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+    /* Düğme etiketleri seçilebilir olmasın: mobilde iki kez dokunmak veya
+       basılı tutmak metni seçip mavi bir vurgu bırakıyor, davetiyenin
+       ortasında çok göze batıyor. Gövde metni seçilebilir kalır. */
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* Erişilebilir gizleme */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   YARDIMCI SINIFLAR
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/**
+ * Sıvı altın tipografi — başlıklarda yavaşça kayan folyo parlaması.
+ *
+ * Koyu temada gradyanın tepesinde neredeyse beyaz bir kıvılcım vardı
+ * (#FFFAF0). Fildişi zeminde o kıvılcım harfin içinde bir DELİK açıyor —
+ * zeminden ayırt edilemiyor. Açık temada parlama en fazla `gold-lit`e
+ * çıkar ve gradyanın büyük kısmı orta-koyu tonlarda kalır; harf formu
+ * her an okunur.
+ */
+@utility text-foil {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-gold-deep) 0%,
+    var(--color-gold) 20%,
+    var(--color-gold-lit) 44%,
+    #ecd28d 50%,
+    var(--color-gold-lit) 56%,
+    var(--color-gold) 80%,
+    var(--color-gold-deep) 100%
+  );
+  background-size: 300% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: foil-sweep 9s var(--ease-velvet) infinite;
+}
+
+/** Düz altın metin — folyo animasyonu olmadan */
+@utility text-gold-plain {
+  background-image: linear-gradient(
+    160deg,
+    var(--color-gold-lit) 0%,
+    var(--color-gold) 26%,
+    var(--color-gold-deep) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/**
+ * Bölüm başlıklarının üstündeki küçük, seyrek harfli etiket.
+ * Renk bilinçli olarak `gold-deep` — `gold` bu boyutta okunmuyor
+ * (bkz. token bloğundaki kontrast notu).
+ */
+@utility eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-gold-deep);
+}
+
+/** İnce altın ayraç çizgisi */
+@utility rule-gold {
+  height: 1px;
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--color-gold) 68%, transparent) 50%,
+    transparent
+  );
+}
+
+/**
+ * Kart yüzeyi — beyaz kağıt.
+ *
+ * Koyu temadaki `backdrop-filter` bulanıklığı kaldırıldı: açık zeminde
+ * arkasında bulanıklaştıracak bir şey yok, sadece her kartta bir GPU
+ * katmanı maliyeti çıkarıyordu. Yerine kartı kağıttan ayıran yumuşak
+ * ve sıcak bir gölge var.
+ */
+@utility surface {
+  background: var(--color-card);
+  border: 1px solid color-mix(in oklab, var(--color-gold) 22%, transparent);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+/**
+ * Çentik / home çubuğu güvenli alanı.
+ *
+ * Bunlar `padding` DEĞİL `margin` kullanır — bilinçli olarak. Aynı özelliği
+ * yazan iki yardımcı sınıf (`pb-safe` + `pb-20`) çakışır ve hangisinin
+ * kazandığı CSS sırasına kalır; bu da telefonda öngörülemeyen boşluklara
+ * yol açar. Margin kullanınca padding'le birlikte güvenle kullanılabilir.
+ */
+@utility mt-safe {
+  margin-top: env(safe-area-inset-top);
+}
+@utility mb-safe {
+  margin-bottom: env(safe-area-inset-bottom);
+}
+
+/** Dokunma hedefi en az 44×44 — Apple/WCAG minimumu */
+@utility tap {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/** Bölüm iç boşluğu — mobilde dar, masaüstünde geniş */
+@utility section-x {
+  padding-inline: max(1.25rem, env(safe-area-inset-left), env(safe-area-inset-right));
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ANİMASYONLAR
+   ═══════════════════════════════════════════════════════════════════════ */
+@keyframes foil-sweep {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes drift-down {
+  from {
+    transform: translateY(-6px);
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  to {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   HAREKET AZALTMA — sistem tercihine tam saygı
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

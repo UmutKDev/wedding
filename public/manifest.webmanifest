@@ -1,0 +1,15 @@
+{
+  "name": "Ömer & Burcu — Evleniyoruz",
+  "short_name": "Ömer & Burcu",
+  "description": "Ömer Çevikbaş ve Burcu Bozgeyik'in düğün davetiyesi",
+  "lang": "tr",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FAF7F2",
+  "theme_color": "#FAF7F2",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

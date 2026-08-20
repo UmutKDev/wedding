@@ -1,7 +1,7 @@
 /* ════════════════════════════════════════════════════════════════════════
  *  ARAYÜZ METİNLERİ
  *  Sitede görünen bütün sabit metinler burada. Kişiye/etkinliğe özel
- *  veriler (isim, tarih, adres, hikâye…) için → config/wedding.ts
+ *  veriler (isim, tarih, adres, anılar…) için → config/wedding.ts
  * ════════════════════════════════════════════════════════════════════════ */
 
 export const tr = {
@@ -64,17 +64,6 @@ export const tr = {
     mapLabel: 'harita üzerindeki konumu',
   },
 
-  // ── Program ─────────────────────────────────────────────────────────
-  program: {
-    eyebrow: 'Akış',
-    title: 'Gecenin Programı',
-  },
-
-  // ── Hikâye ──────────────────────────────────────────────────────────
-  story: {
-    eyebrow: 'Nasıl başladı',
-    title: 'Hikâyemiz',
-  },
   storyFilm: {
     eyebrow: 'Kısa film',
     title: 'Bizden Bir Parça',
@@ -95,8 +84,6 @@ export const tr = {
   gallery: {
     eyebrow: 'Anılar',
     title: 'Bizden Kareler',
-    hintTouch: 'Kaydırarak gezinin',
-    hintPointer: 'Sürükleyerek çevirin',
     close: 'Kapat',
     prev: 'Önceki fotoğraf',
     next: 'Sonraki fotoğraf',

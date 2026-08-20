@@ -3,13 +3,10 @@ import { create } from 'zustand'
 /**
  * Cihaz performans kademesi.
  *
- *  high   → masaüstü / üst seviye telefon: 12k partikül, tektaş, tam DPR
- *  medium → modern telefonlar: 5k partikül, tektaş yok
+ *  high   → masaüstü / üst seviye telefon: 12k partikül, tam DPR
+ *  medium → modern telefonlar: 5k partikül
  *  low    → giriş seviyesi telefon: 1.5k partikül, düşük DPR
- *  none   → WebGL yok veya hareket azaltma açık: statik 2B fallback
- *
- * Kenar yumuşatma (MSAA) kademeye BAĞLI DEĞİL, her yerde açık: fildişi
- * zeminde tırtıklı bir siluet en ucuz telefonda bile göze batar.
+ *  none   → WebGL yok veya hareket azaltma açık: sahne hiç kurulmaz
  */
 export type PerfTier = 'high' | 'medium' | 'low' | 'none'
 
@@ -18,42 +15,20 @@ export interface TierSettings {
   particles: number
   /** Cihaz piksel oranı üst sınırı — mobilde en pahalı ayar budur */
   maxDpr: number
-  /** Yüzükteki tektaş (ışık kırılması) */
-  solitaire: boolean
-  /** Cam kaide (transmission materyali — çok pahalı) */
-  glassPedestal: boolean
-  /** Gölge haritaları */
-  shadows: boolean
-  /** Torus segment sayısı — silüet pürüzsüzlüğü */
-  ringSegments: [radial: number, tubular: number]
 }
 
 export const TIER_SETTINGS: Record<Exclude<PerfTier, 'none'>, TierSettings> = {
   high: {
     particles: 12_000,
     maxDpr: 2,
-    solitaire: true,
-    glassPedestal: true,
-    shadows: true,
-    ringSegments: [64, 256],
   },
   medium: {
     particles: 5_000,
     maxDpr: 1.75,
-    // Tektaş yalnızca üst kademede: geçirgen malzeme olmadan donuk gri
-    // bir üçgen gibi duruyor — hiç olmaması daha iyi.
-    solitaire: false,
-    glassPedestal: false,
-    shadows: false,
-    ringSegments: [32, 128],
   },
   low: {
     particles: 1_500,
     maxDpr: 1.25,
-    solitaire: false,
-    glassPedestal: false,
-    shadows: false,
-    ringSegments: [26, 104],
   },
 }
 

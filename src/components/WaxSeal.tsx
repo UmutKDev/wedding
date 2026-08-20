@@ -43,7 +43,7 @@ export function WaxSeal({ size = 76, className = '' }: WaxSealProps) {
         style={{
           inset: -size * 0.045,
           borderRadius: '47% 53% 51% 49% / 52% 48% 52% 48%',
-          background: 'linear-gradient(150deg, #7A5F1C 0%, #4A3810 100%)',
+          background: 'linear-gradient(150deg, #A0803A 0%, #6E5620 100%)',
           opacity: 0.85,
           transform: 'rotate(-8deg)',
         }}
@@ -57,11 +57,11 @@ export function WaxSeal({ size = 76, className = '' }: WaxSealProps) {
           height: size,
           borderRadius: '51% 49% 48% 52% / 49% 53% 47% 51%',
           background:
-            'radial-gradient(112% 96% at 36% 26%, #E0BE5E 0%, #C29A31 38%, #93711F 68%, #5C4612 100%)',
+            'radial-gradient(112% 96% at 36% 26%, #EBD285 0%, #D0A93F 38%, #B08A2C 70%, #86671B 100%)',
           boxShadow: [
-            'inset 0 2px 5px rgba(255,240,200,0.38)',
-            'inset 0 -4px 10px rgba(0,0,0,0.55)',
-            '0 10px 26px rgba(0,0,0,0.62)',
+            'inset 0 2px 5px rgba(255,245,215,0.5)',
+            'inset 0 -4px 10px rgba(74,56,16,0.4)',
+            '0 8px 22px rgba(43,39,36,0.28)',
           ].join(', '),
           transform: 'rotate(3deg)',
         }}

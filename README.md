@@ -5,11 +5,13 @@ veritabanı yok, abonelik yok — `dist/` klasörü herhangi bir statik hosting'
 atılıp çalışır.
 
 **Öne çıkanlar**
-- Gerçek 3B sahne (React Three Fiber): fiziksel doğru altın nikah yüzükleri,
-  GPU partikül alanı, kaydırmaya bağlı sinematik kamera
-- Dört video slotu: açılış filmi, hero döngüsü, hikâye filmi, dikey reel
-- Canlı geri sayım, takvime ekleme (.ics + Google), üç harita uygulamasına
-  yol tarifi, hikâye zaman tüneli, anılar + lightbox, program akışı, paylaşım
+- Hero'da tam ekran düğün arabası videosu (dikey kurgu, sessiz döngü)
+- Canlı geri sayım, takvime ekleme (.ics + Google), gömülü harita + üç
+  navigasyon uygulamasına yol tarifi, oklu fotoğraf slider'ı + tam ekran
+  görüntüleyici, paylaşım
+- Arka planda GPU altın toz alanı (React Three Fiber)
+- Paylaşım kartı: tam Open Graph + Twitter meta seti, görsel script ile
+  üretiliyor, adresler `siteUrl`'den mutlak olarak enjekte ediliyor
 - Katılım formu yok (istenmedi)
 - **Mobil öncelikli** — dört kademeli performans sistemi, güvenli alan
   desteği, hareket azaltma tercihine tam uyum
@@ -31,12 +33,13 @@ Tarayıcı: <http://localhost:5173>
 
 | İstediğin | Dosya |
 |---|---|
-| İsim, tarih, saat, mekân, adres, program, hikâye, anılar… | **`src/config/wedding.ts`** |
+| İsim, tarih, saat, mekân, adres, etkinlikler, anılar… | **`src/config/wedding.ts`** |
 | Arayüzdeki sabit yazılar ("Kaydırın", "Yol Tarifi"…) | `src/content/tr.ts` |
 | Renkler, fontlar, boşluk ölçüleri | `src/styles/index.css` (`@theme` bloğu) |
 | Bölümlerin sırası veya hangisinin görüneceği | `src/App.tsx` |
 | Video ve müzik | `src/media/` → [ASSETS.md](ASSETS.md) |
 | Fotoğraflar | `public/photos/` → [ASSETS.md](ASSETS.md) |
+| Paylaşım kartı (WhatsApp önizlemesi) | `python3 scripts/make-og-image.py` |
 
 **Neredeyse her şey `src/config/wedding.ts` içinde.** Bölüm bileşenlerinin
 içine sabit metin yazılmadı; bilgi değiştiğinde tek dosyaya dokunulur.
@@ -61,9 +64,11 @@ Bölümler verisi yoksa kendiliğinden gizlenir:
 | Bölüm | Gizlenme koşulu |
 |---|---|
 | Anılar | `gallery: []` |
-| Hikâye tüneli | `story: []` |
 | Hikâye filmi / Reel | video dosyası yok |
 | İletişim (kapanışta) | `contact: []` |
+
+Sayfa şu sırayla akar:
+**Hero → Geri Sayım → Detaylar → Anılar → (varsa filmler) → Mekân → Kapanış**
 
 ---
 
@@ -86,8 +91,11 @@ npm run build
 ```
 Oluşan `dist/` klasörünü sunucuya kopyala.
 
-> Deploy'dan sonra `src/config/wedding.ts` içindeki **`siteUrl`**'i gerçek
-> adresle güncelle — paylaş düğmesi ve takvim kaydı onu kullanıyor.
+> Alan adı **`omer-burcu.umutk.me`** olarak ayarlı
+> (`src/config/wedding.ts` → `siteUrl`). Paylaş düğmesi, takvim kaydı ve
+> **paylaşım kartının tamamı** bunu kullanıyor: Open Graph mutlak URL
+> ister, yanlışsa WhatsApp önizlemesi boş çıkar. Adres değişirse orayı
+> güncelle — `npm run build` geçersiz bir adres görürse uyarır.
 
 ---
 
@@ -139,16 +147,15 @@ state'e bağlamak her karede yeniden render tetikler. Değerler
 Cihaz otomatik sınıflandırılır (`src/three/perf.ts`); kare hızı düşerse
 çalışma anında bir kademe iner.
 
-| Kademe | Partikül | DPR | Tektaş |
-|---|---|---|---|
-| `high` | 12.000 | ≤2 | ✓ |
-| `medium` | 5.000 | ≤1.75 | ✗ |
-| `low` | 1.500 | ≤1.25 | ✗ |
-| `none` | WebGL yok / hareket azaltma → 2B fallback | | |
+| Kademe | Partikül | DPR |
+|---|---|---|
+| `high` | 12.000 | ≤2 |
+| `medium` | 5.000 | ≤1.75 |
+| `low` | 1.500 | ≤1.25 |
+| `none` | WebGL yok / hareket azaltma → sahne hiç kurulmaz | |
 
-Kenar yumuşatma (MSAA) her kademede açık — fildişi zeminde tırtıklı bir
-siluet en ucuz telefonda bile göze batar. Son işleme zinciri (bloom, vinyet)
-bilinçli olarak yok: açık temada bantlanma üretiyordu ve MSAA'nın getirdiği
+Son işleme zinciri (bloom, vinyet) bilinçli olarak yok: açık temada
+bantlanma üretiyordu ve kenar yumuşatmanın (her kademede açık) getirdiği
 netlikten daha azını veriyordu.
 
 Test etmek için: `?tier=high`, `?tier=medium`, `?tier=low`, `?tier=none`
@@ -163,10 +170,12 @@ masaüstü alışkanlığının tersine yapıldı:
 - **Dokunmatikte yumuşak kaydırma (Lenis) kapalı.** iOS ve Android'in
   kendi momentum fiziği zaten çok iyi; üstüne JS yumuşatma bindirmek
   telefonda gecikmeli hissettiriyor ve sürekli RAF döngüsü pil yiyor.
-- **Anılar bölümü 3B karusel değil.** Planlanan silindirik 3B karusel
-  masaüstünde etkileyici olurdu ama dokunmatikte sürükleme hareketi
-  sayfanın dikey kaydırmasıyla çakışıyor. 3 veya daha az fotoğrafta
-  ortalanmış ızgara, fazlasında yerel `scroll-snap` şeridi kullanılıyor.
+- **Anılar slider'ı yerel `scroll-snap` üstünde.** Parmakla kaydırma
+  iOS/Android'in kendi momentum fiziğini kullanır; sağ/sol oklar aynı
+  şeridi programatik olarak kaydırır. Kendi sürükleme mantığımızı
+  yazsaydık dokunmatikte yerelin altında kalırdı.
+  ⚠️ Ok animasyonu elle tween'lenir: `scrollTo({behavior:'smooth'})`
+  `scroll-snap-type: mandatory` ile çakışıp hiç kaydırmıyor.
 - **Harita `loading="lazy"` ile gömülü.** Doğrudan görünür (dokunma
   gerektirmez) ama iframe ancak görüş alanına yaklaşınca istek atar;
   açılışta üçüncü tarafa istek gitmez.

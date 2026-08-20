@@ -6,8 +6,6 @@ import * as THREE from 'three'
 import { useAppStore } from '../store/useAppStore'
 import { CameraRig } from './CameraRig'
 import { GoldDust } from './GoldDust'
-import { Lighting } from './Lighting'
-import { Rings } from './Rings'
 import { SceneErrorBoundary } from './SceneErrorBoundary'
 import { usePerfStore } from './perf'
 
@@ -61,8 +59,7 @@ export default function Scene() {
              *
              * Şeffaf canvas bu sınıf hatayı tamamen ortadan kaldırır:
              * zemin tek yerde tanımlı, hiçbir eğriden geçmiyor, her
-             * kademede birebir aynı. Sahne yalnızca yüzükleri ve tozu
-             * çiziyor.
+             * kademede birebir aynı. Sahne yalnızca altın tozunu çiziyor.
              */
             alpha: true,
             stencil: false,
@@ -89,8 +86,6 @@ export default function Scene() {
           */}
           <PerformanceMonitor onDecline={downgrade} flipflops={3} ms={250} iterations={6}>
             <Suspense fallback={null}>
-              <Lighting />
-              <Rings />
               <GoldDust />
               <CameraRig />
             </Suspense>

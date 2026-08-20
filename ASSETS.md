@@ -39,35 +39,20 @@ varsa tarayıcıya önce o sunulur, %30 kadar küçüktür.
 
 ```
 public/photos/
-├─ story/      ← hikâye zaman tünelindeki fotoğraflar
-└─ memories/   ← "Anılar" bölümündeki fotoğraflar
+└─ memories/   ← "Anılar" slider'ındaki fotoğraflar
 ```
 
-### ⭐ Şu an beklenen iki dosya
+Şu an iki nişan fotoğrafı ekli (`01.jpg`, `02.jpg`) ve web için
+küçültülmüş durumda. Orijinalleri `photos-original/` klasöründe duruyor —
+o klasör `.gitignore`'da ve siteye dahil edilmiyor.
 
-`src/config/wedding.ts` bu iki yolu bekliyor:
-
-```
-public/photos/memories/01.jpg    ← nişan pastasını keserken
-public/photos/memories/02.jpg    ← birbirinize pasta yedirirken
-```
-
-Dosyalar gelene kadar Anılar bölümü kırık görsel ikonu değil, zarif bir
-altın çerçeveli yer tutucu gösterir — site bozuk görünmez.
+Yeni fotoğraf eklemek için dosyayı bu klasöre koyup `gallery` dizisine bir
+satır ekle; slider ok ve nokta sayısını kendisi ayarlar. Dosya bulunamazsa
+kırık görsel ikonu değil, zarif bir yer tutucu görünür.
 
 Fotoğrafı klasöre koy, sonra `src/config/wedding.ts` içinde yolunu yaz:
 
 ```ts
-story: [
-  {
-    when: '2019',
-    title: 'Tanıştık',
-    body: '…',
-    photo: '/photos/story/01-tanisma.webp',   // ← buraya
-    alt: 'Ömer ve Burcu ilk kez birlikte',    // ← görme engelli misafirler için
-  },
-]
-
 gallery: [
   { src: '/photos/memories/01.jpg', alt: 'Ömer ve Burcu nişan pastalarını keserken', caption: 'Nişanımız' },
   { src: '/photos/memories/02.jpg', alt: 'Ömer ve Burcu birbirlerine pasta yedirirken', caption: 'Nişanımız' },
@@ -83,42 +68,66 @@ Telefondan çıkan bir fotoğraf 4–8 MB'dir. Galeride 20 tane olduğunu düş�
 misafirin 100 MB veri harcaması gerekir. Mutlaka küçült.
 
 ```bash
-# Tek tek — WebP, uzun kenar 1600px, kalite 82
-cd public/photos/memories
-for f in *.jpg *.jpeg *.png; do
-  ffmpeg -i "$f" -vf "scale='min(1600,iw)':-2" -q:v 82 "${f%.*}.webp"
+# macOS'ta yerleşik `sips` — ffmpeg gerekmez.
+# Uzun kenarı 1600 piksele indirir, EXIF yönelimini korur.
+for f in public/photos/memories/*.jpg; do
+  sips -Z 1600 -s formatOptions 82 "$f" --out "$f"
 done
 ```
 
-macOS'ta ffmpeg yoksa **Önizleme → Araçlar → Boyutu Ayarla** ile de olur;
-uzun kenarı 1600 piksele indirmen yeterli.
+> Telefondan çıkan bir fotoğraf 3–8 MB olabilir. Mevcut iki fotoğraf bu
+> komutla 4.1 MB'tan 839 KB'a indi — mobil veride ciddi fark.
 
 | Kullanım | Önerilen boyut | Hedef dosya |
 |---|---|---|
-| Anılar | 1600px uzun kenar | < 300 KB |
-| Hikâye tüneli | 1200px uzun kenar | < 200 KB |
+| Anılar | 1600px uzun kenar | < 500 KB |
 | Paylaşım görseli (`og/preview.jpg`) | tam 1200×630 | < 400 KB |
 
 ---
 
-## 🔗 `public/og/preview.jpg` — WhatsApp önizlemesi
+## 🔗 Paylaşım kartı (WhatsApp / iMessage / X önizlemesi)
 
-Link WhatsApp'ta paylaşıldığında görünen kapak görseli. **Tam 1200×630 px**
-olmalı, aksi hâlde kırpılır.
+Bu görseller **script ile üretiliyor**, elle hazırlanmıyor:
 
-En iyi sonuç: fildişi zeminde, ortada "Ömer & Burcu" ve tarih. Bunu Canva'da
-5 dakikada yapabilirsin ya da siteyi masaüstünde açıp hero ekranının
-ekran görüntüsünü alıp 1200×630'a kırpabilirsin.
+```bash
+python3 scripts/make-og-image.py
+```
 
-Dosya yoksa link önizlemesi görselsiz görünür — site çalışmaya devam eder.
+Üretilenler:
+
+| Dosya | Boyut | Nerede kullanılır |
+|---|---|---|
+| `public/og/preview.jpg` | 1200×630 | Link önizlemesi |
+| `public/apple-touch-icon.png` | 180×180 | iOS "ana ekrana ekle" |
+
+Script sitenin paletini ve fontlarını taklit eder: solda çiftin fotoğrafı,
+sağda fildişi panelde isimler, tarih ve şehir. İsim veya tarih değişirse
+script'in başındaki değerleri güncelleyip yeniden çalıştır.
+
+### ⚠️ `siteUrl` doğru olmalı
+
+Open Graph **mutlak URL** ister. Etiketler build sırasında
+`src/config/wedding.ts` içindeki `siteUrl`'den üretilir; orası yanlışsa
+WhatsApp görseli çekemez ve önizleme **tamamen boş** çıkar — üstelik
+etiketler doğru göründüğü için sebebi anlaşılmaz.
+
+Şu an ayarlı: **`https://omer-burcu.umutk.me`**. Alan adı değişirse
+`src/config/wedding.ts` içinden güncelle — `npm run build` adresin
+herkese açık bir HTTPS adresi olup olmadığını denetler ve değilse uyarır.
+
+### Önizleme eskiyse
+
+WhatsApp ve Facebook kartları agresif önbelleğe alır. Görsel URL'sine
+içerikten türetilen bir damga ekleniyor (`?v=c6de5515`), yani görseli
+değiştirip yeniden derlediğinde adres de değişir ve önizleme tazelenir.
+Zorla yenilemek için:
+[Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
 
 ---
 
-## 🎨 `public/favicon.svg` ve `apple-touch-icon.png`
+## 🎨 `public/favicon.svg`
 
-`favicon.svg` hazır geliyor (fildişi zeminde altın iki halka). Değiştirmek istersen
-`apple-touch-icon.png` de ekleyebilirsin — **180×180 px**, iOS'ta ana
-ekrana eklendiğinde kullanılır.
+Fildişi zeminde altın iki halka; hazır geliyor. Tarayıcı sekmesinde görünür.
 
 ---
 

@@ -14,8 +14,6 @@ import { Reel, StoryFilm } from './sections/Films'
 import { Gallery } from './sections/Gallery'
 import { Hero } from './sections/Hero'
 import { Overture } from './sections/Overture'
-import { Program } from './sections/Program'
-import { Story } from './sections/Story'
 import { Venue } from './sections/Venue'
 import { useAppStore } from './store/useAppStore'
 
@@ -66,17 +64,15 @@ export function App() {
       >
         {/*
           Sıra bilinçli: önce "ne zaman" (geri sayım, tarih ve etkinlik
-          kartları), sonra "kim" (hikâye, anılar, filmler), en sonda
-          "nerede" (program akışı, mekân).
+          kartları), sonra "kim" (anılar, varsa filmler), en sonda
+          "nerede" (mekân) ve kapanış.
         */}
         <Hero />
         <Countdown />
         <Details />
-        <Story />
         <Gallery />
         <StoryFilm />
         <Reel />
-        <Program />
         <Venue />
         <Closing />
       </main>

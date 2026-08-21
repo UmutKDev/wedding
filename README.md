@@ -48,10 +48,11 @@ içine sabit metin yazılmadı; bilgi değiştiğinde tek dosyaya dokunulur.
 
 ### Etkinlikler
 
-Nikah, düğün ve kına ayrı bölümler değil — hepsi `events` dizisinde birer
-kayıt ve Detaylar bölümünde yan yana kart olarak görünüyorlar. Yeni bir
-etkinlik eklemek diziye bir nesne eklemekten ibaret; ızgara sütun sayısını
-kendisi ayarlar.
+Etkinlikler `events` dizisinde birer kayıt ve "Ne Zaman, Nerede"
+bölümünde kart olarak görünüyorlar. Şu an tek kart var (düğün); nikah
+veya kına gibi ayrı bir kart isterseniz diziye bir nesne eklemeniz
+yeterli — ızgara sütun sayısını kendisi ayarlar (1 kart ortalanır,
+2 kart iki sütun, 3+ üç sütun).
 
 Bir etkinlik farklı bir mekândaysa ona `venue: { … }` ekle — kart o zaman
 kendi adresini de gösterir. Takvim kaydı her zaman tüm etkinliklerin en
@@ -68,7 +69,11 @@ Bölümler verisi yoksa kendiliğinden gizlenir:
 | İletişim (kapanışta) | `contact: []` |
 
 Sayfa şu sırayla akar:
-**Hero → Geri Sayım → Detaylar → Anılar → (varsa filmler) → Mekân → Kapanış**
+**Hero → Geri Sayım → Ne Zaman/Nerede → Anılar → (varsa filmler) → Kapanış**
+
+"Ne Zaman, Nerede" bölümü hem tarihi/etkinlik kartını hem de mekânı
+(gömülü harita + navigasyon) içerir — başlığın sorduğu iki soru da orada
+cevaplanıyor, ayrı bir "Mekân" bölümü yok.
 
 ---
 

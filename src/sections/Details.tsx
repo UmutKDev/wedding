@@ -1,6 +1,7 @@
 import { AddToCalendar } from '../components/AddToCalendar'
 import { Reveal } from '../components/Reveal'
 import { SectionShell } from '../components/SectionShell'
+import { VenueCard } from './Venue'
 import { wedding } from '../config/wedding'
 import { tr } from '../content/tr'
 import { dateParts, formatTime } from '../lib/format'
@@ -58,14 +59,17 @@ export function Details() {
       </Reveal>
 
       {/*
-        Etkinlikler — nikah, düğün ve kına yan yana.
-        Sütun sayısı etkinlik sayısına göre: iki etkinlikte 2, üç ve
-        üzerinde 3. Sabit `sm:grid-cols-2` bırakılsaydı üçüncü kart tek
-        başına alt satıra düşer ve dengesiz görünürdü.
+        Etkinlik kartları. Sütun düzeni sayıya göre: tek etkinlikte
+        ortalanmış dar bir kart (yarım genişlikte asılı kalmasın), ikide
+        2 sütun, üç ve üzerinde 3.
       */}
       <div
         className={`mt-12 grid gap-4 ${
-          wedding.events.length >= 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-2'
+          wedding.events.length === 1
+            ? 'mx-auto max-w-[24rem]'
+            : wedding.events.length === 2
+              ? 'sm:grid-cols-2'
+              : 'sm:grid-cols-3'
         }`}
       >
         {wedding.events.map((event, i) => (
@@ -105,8 +109,13 @@ export function Details() {
       </div>
 
       <Reveal delay={0.2}>
-        <AddToCalendar event={wholeDay} filename="omer-burcu-dugun.ics" className="mt-12" />
+        <AddToCalendar event={wholeDay} filename="omer-burcu-dugun.ics" className="mt-10" />
       </Reveal>
+
+      {/* "Nerede" — harita, adres ve navigasyon, düğün kartının hemen altında */}
+      <div className="mt-12">
+        <VenueCard />
+      </div>
     </SectionShell>
   )
 }

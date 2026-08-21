@@ -42,7 +42,7 @@ export const tr = {
   // ── Detaylar / takvim ───────────────────────────────────────────────
   details: {
     eyebrow: 'Ne zaman, nerede',
-    title: 'Sizi Aramızda Görmek İsteriz',
+    title: 'Düğünümüz',
     addToCalendar: 'Takvime Ekle',
     addToCalendarApple: 'Takvim dosyası (.ics)',
     addToCalendarGoogle: 'Google Takvim',
@@ -51,8 +51,6 @@ export const tr = {
 
   // ── Mekân ───────────────────────────────────────────────────────────
   venue: {
-    eyebrow: 'Mekân',
-    title: 'Buluşma Noktamız',
     directions: 'Yol Tarifi',
     // Kısa tutuluyor: üstteki "Yol Tarifi" başlığı bağlamı zaten veriyor
     // ve üç düğme telefonda tek satıra sığıyor.
@@ -93,7 +91,7 @@ export const tr = {
   // ── Kapanış ─────────────────────────────────────────────────────────
   closing: {
     line1: 'Bu güzel günde',
-    line2: 'yanımızda olmanızı çok isteriz',
+    line2: 'sizleri de aramızda görmek isteriz',
     share: 'Davetiyeyi Paylaş',
     shareTitle: 'Ömer & Burcu — Evleniyoruz',
     shareText: 'Düğünümüze davetlisiniz 🤍',

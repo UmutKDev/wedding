@@ -1,7 +1,6 @@
 import { CopyButton } from '../components/CopyButton'
 import { GoldButton } from '../components/GoldButton'
 import { Reveal } from '../components/Reveal'
-import { SectionShell } from '../components/SectionShell'
 import { wedding } from '../config/wedding'
 import { tr } from '../content/tr'
 import {
@@ -13,28 +12,23 @@ import {
   type MapTarget,
 } from '../lib/maps'
 
-interface VenueProps {
-  /** Kına gibi başka bir mekân için de kullanılabilir */
+interface VenueCardProps {
+  /** Farklı bir mekân için de kullanılabilir */
   venue?: MapTarget & { note?: string }
-  id?: string
-  eyebrow?: string
-  title?: string
 }
 
 /**
  * Mekân kartı: gömülü harita, adres, kopyalama ve yol tarifi bağlantıları.
+ *
+ * Kendi bölümü YOK — "Ne zaman, nerede" bölümünün içinde, düğün kartının
+ * hemen altında duruyor. Bölüm başlığı zaten "ne zaman VE NEREDE" diyor;
+ * mekânı ayrı bir başlık altına almak aynı soruyu ikiye bölüyordu.
  */
-export function Venue({
-  venue = wedding.venue,
-  id = 'mekan',
-  eyebrow = tr.venue.eyebrow,
-  title = tr.venue.title,
-}: VenueProps) {
+export function VenueCard({ venue = wedding.venue }: VenueCardProps) {
   const address = fullAddress(venue)
 
   return (
-    <SectionShell id={id} eyebrow={eyebrow} title={title} width="wide">
-      <Reveal>
+    <Reveal>
         <div className="surface overflow-hidden">
           {/*
             Gömülü Google haritası.
@@ -110,8 +104,7 @@ export function Venue({
               </div>
             </div>
           </div>
-        </div>
-      </Reveal>
-    </SectionShell>
+      </div>
+    </Reveal>
   )
 }

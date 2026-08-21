@@ -71,17 +71,20 @@ export function Hero() {
 
       {/*
         Metin perdesi — açık temada KARARTMAZ, fildişine doğru yıkar.
-        Videoyla birlikte üstten, videosuz alttan (3B yüzükler orada).
-        Yoğunluk 0.78 → 0.62: video artık soluklaşmadan, metin de
-        okunurluğunu koruyor.
+
+        Perde metin bloğunun TAMAMINI kapsayacak kadar uzun (%72) ve alt
+        ucuna kadar taşıyıcı: daha kısa ve daha hızlı sönen bir perdede
+        tarih satırı yolun orta tonlu asfaltına denk gelip okunmuyordu.
+        Videonun kendisi hâlâ soluklaşmıyor çünkü yoğunluk aşağı doğru
+        kademeli iniyor.
       */}
       <div
-        className={`pointer-events-none absolute inset-x-0 z-10 h-[62%] ${
+        className={`pointer-events-none absolute inset-x-0 z-10 h-[72%] ${
           hasVideo ? 'top-0' : 'bottom-0'
         }`}
         style={{
           background: hasVideo
-            ? 'linear-gradient(180deg, rgba(250,247,242,0.94) 0%, rgba(250,247,242,0.72) 46%, rgba(250,247,242,0) 100%)'
+            ? 'linear-gradient(180deg, rgba(250,247,242,0.96) 0%, rgba(250,247,242,0.9) 38%, rgba(250,247,242,0.66) 62%, rgba(250,247,242,0) 100%)'
             : 'linear-gradient(180deg, rgba(250,247,242,0) 0%, rgba(250,247,242,0.78) 42%, rgba(250,247,242,0.96) 100%)',
         }}
       />
@@ -126,7 +129,17 @@ export function Hero() {
 
         <motion.div className="rule-gold w-32 sm:w-44" {...rise(0.8)} />
 
-        <motion.div className="flex flex-col items-center gap-1.5" {...rise(0.95)}>
+        {/*
+          Tarih ve şehir videonun üstünde duruyor; perdenin altındaki kare
+          her an değişiyor. Açık renkli bir hâle (text-shadow) koyu metnin
+          arkasına ince bir fildişi yastık koyar — hangi kare gelirse
+          gelsin okunur kalır. Perde tek başına buna yetmiyordu.
+        */}
+        <motion.div
+          className="flex flex-col items-center gap-1.5"
+          style={{ textShadow: '0 1px 14px rgba(250,247,242,0.95), 0 0 4px rgba(250,247,242,0.9)' }}
+          {...rise(0.95)}
+        >
           <p className="text-ink text-lead font-display tracking-[0.14em]">
             {formatFullDate(wedding.countdownTarget)}
           </p>

@@ -129,33 +129,20 @@ export const wedding: WeddingConfig = {
   venue: mainVenue,
 
   /**
-   * Etkinlikler. Her biri "Takvime Ekle" butonuyla ayrı ayrı eklenebilir.
-   * Kendi mekânı olmayan etkinlik ana mekânı kullanır.
+   * Etkinlikler — "Ne zaman, nerede" bölümünde kart olarak görünür.
+   *
+   * Şu an tek kart var (düğün). Nikah/kına gibi ayrı bir kart eklemek
+   * isterseniz diziye bir nesne eklemeniz yeterli; ızgara sütun sayısını
+   * kendisi ayarlar. Kendi mekânı olan etkinliğe `venue: { … }` eklerseniz
+   * kart adresini de gösterir.
    */
   events: [
-    {
-      id: 'nikah',
-      label: 'Nikah Töreni',
-      startsAt: '2026-09-20T19:00:00+03:00', // TODO: saat
-      endsAt: '2026-09-20T19:45:00+03:00', // TODO: saat
-      description: 'Nikah törenimizde yanımızda olmanızı çok isteriz.',
-    },
     {
       id: 'dugun',
       label: 'Düğün',
       startsAt: '2026-09-20T20:00:00+03:00', // TODO: saat
       endsAt: '2026-09-21T00:30:00+03:00', // TODO: saat
-      description: 'Yemek, müzik ve dans — sabaha kadar.',
-    },
-    {
-      id: 'kina',
-      label: 'Kına',
-      // Düğünle AYNI VAKİTTE — ayrı bir gün veya seans değil.
-      startsAt: '2026-09-20T20:00:00+03:00', // TODO: saat
-      endsAt: '2026-09-21T00:30:00+03:00', // TODO: saat
-      description: 'Kınamız düğünle birlikte, aynı gecede.',
-      // Farklı bir mekânda olsaydı `venue: { … }` eklemek yeterliydi;
-      // kart o zaman kendi adresini de gösterirdi.
+      // Açıklama bilinçli olarak yok: kartta yalnızca saat duruyor.
     },
   ],
 

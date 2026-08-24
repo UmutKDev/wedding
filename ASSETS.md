@@ -2,10 +2,10 @@
 
 İki farklı klasör var ve aralarındaki fark bilinçli:
 
-| Klasör | Ne için | Neden burada |
-|---|---|---|
-| `src/media/` | Video ve müzik | **Varlığı bölümü açar/kapatır.** Build sırasında otomatik taranır; dosya varsa bölüm görünür, yoksa gizlenir. Kod tarafında ayar yok. |
-| `public/photos/` | Fotoğraflar | **Metin de gerekir** (alt yazısı, açıklaması, sırası). Zaten config'e yazacağınız için yolu da orada belirtiyorsunuz. |
+| Klasör           | Ne için        | Neden burada                                                                                                                          |
+| ---------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/media/`     | Video ve müzik | **Varlığı bölümü açar/kapatır.** Build sırasında otomatik taranır; dosya varsa bölüm görünür, yoksa gizlenir. Kod tarafında ayar yok. |
+| `public/photos/` | Fotoğraflar    | **Metin de gerekir** (alt yazısı, açıklaması, sırası). Zaten config'e yazacağınız için yolu da orada belirtiyorsunuz.                 |
 
 ---
 
@@ -13,19 +13,19 @@
 
 Dosyayı doğru isimle bırak, gerisi kendiliğinden olur.
 
-| Dosya | Slot | Oran | Zorunlu? |
-|---|---|---|---|
-| `intro.mp4` | Açılış filmi | 16:9 | — |
-| `intro-portrait.mp4` | Açılışın dikey kurgusu | 9:16 | opsiyonel |
-| `intro.jpg` | Açılış poster karesi | 16:9 | önerilir |
-| `hero-loop.mp4` | Hero arka planı (sessiz) | 16:9 | — |
-| `hero-loop-portrait.mp4` | Hero'nun dikey kurgusu | 9:16 | **önerilir** |
-| `hero-loop.jpg` | Hero poster karesi | 16:9 | önerilir |
-| `story.mp4` | "Bizden Bir Parça" filmi | 16:9 | — |
-| `story.jpg` | Hikâye poster karesi | 16:9 | önerilir |
-| `reel.mp4` | Dikey reel | 9:16 | — |
-| `reel.jpg` | Reel poster karesi | 9:16 | önerilir |
-| `ambient.mp3` | Arka plan müziği | — | — |
+| Dosya                    | Slot                     | Oran | Zorunlu?     |
+| ------------------------ | ------------------------ | ---- | ------------ |
+| `intro.mp4`              | Açılış filmi             | 16:9 | —            |
+| `intro-portrait.mp4`     | Açılışın dikey kurgusu   | 9:16 | opsiyonel    |
+| `intro.jpg`              | Açılış poster karesi     | 16:9 | önerilir     |
+| `hero-loop.mp4`          | Hero arka planı (sessiz) | 16:9 | —            |
+| `hero-loop-portrait.mp4` | Hero'nun dikey kurgusu   | 9:16 | **önerilir** |
+| `hero-loop.jpg`          | Hero poster karesi       | 16:9 | önerilir     |
+| `story.mp4`              | "Bizden Bir Parça" filmi | 16:9 | —            |
+| `story.jpg`              | Hikâye poster karesi     | 16:9 | önerilir     |
+| `reel.mp4`               | Dikey reel               | 9:16 | —            |
+| `reel.jpg`               | Reel poster karesi       | 9:16 | önerilir     |
+| `ambient.mp3`            | Arka plan müziği         | —    | —            |
 
 Her video için `.webm` varyantı da koyabilirsin (`intro.webm` gibi) —
 varsa tarayıcıya önce o sunulur, %30 kadar küçüktür.
@@ -54,9 +54,17 @@ Fotoğrafı klasöre koy, sonra `src/config/wedding.ts` içinde yolunu yaz:
 
 ```ts
 gallery: [
-  { src: '/photos/memories/01.jpg', alt: 'Ömer ve Burcu nişan pastalarını keserken', caption: 'Nişanımız' },
-  { src: '/photos/memories/02.jpg', alt: 'Ömer ve Burcu birbirlerine pasta yedirirken', caption: 'Nişanımız' },
-]
+  {
+    src: "/photos/memories/01.jpg",
+    alt: "Ömer ve Burcu nişan pastalarını keserken",
+    caption: "Nişanımız",
+  },
+  {
+    src: "/photos/memories/02.jpg",
+    alt: "Ömer ve Burcu birbirlerine pasta yedirirken",
+    caption: "Nişanımız",
+  },
+];
 ```
 
 > `alt` metnini boş geçme. Ekran okuyucu kullanan bir misafir varsa
@@ -78,10 +86,10 @@ done
 > Telefondan çıkan bir fotoğraf 3–8 MB olabilir. Mevcut iki fotoğraf bu
 > komutla 4.1 MB'tan 839 KB'a indi — mobil veride ciddi fark.
 
-| Kullanım | Önerilen boyut | Hedef dosya |
-|---|---|---|
-| Anılar | 1600px uzun kenar | < 500 KB |
-| Paylaşım görseli (`og/preview.jpg`) | tam 1200×630 | < 400 KB |
+| Kullanım                            | Önerilen boyut    | Hedef dosya |
+| ----------------------------------- | ----------------- | ----------- |
+| Anılar                              | 1600px uzun kenar | < 500 KB    |
+| Paylaşım görseli (`og/preview.jpg`) | tam 1200×630      | < 400 KB    |
 
 ---
 
@@ -95,10 +103,10 @@ python3 scripts/make-og-image.py
 
 Üretilenler:
 
-| Dosya | Boyut | Nerede kullanılır |
-|---|---|---|
-| `public/og/preview.jpg` | 1200×630 | Link önizlemesi |
-| `public/apple-touch-icon.png` | 180×180 | iOS "ana ekrana ekle" |
+| Dosya                         | Boyut    | Nerede kullanılır     |
+| ----------------------------- | -------- | --------------------- |
+| `public/og/preview.jpg`       | 1200×630 | Link önizlemesi       |
+| `public/apple-touch-icon.png` | 180×180  | iOS "ana ekrana ekle" |
 
 Script sitenin paletini ve fontlarını taklit eder: solda çiftin fotoğrafı,
 sağda fildişi panelde isimler, tarih ve şehir. İsim veya tarih değişirse
@@ -111,7 +119,7 @@ Open Graph **mutlak URL** ister. Etiketler build sırasında
 WhatsApp görseli çekemez ve önizleme **tamamen boş** çıkar — üstelik
 etiketler doğru göründüğü için sebebi anlaşılmaz.
 
-Şu an ayarlı: **`https://omer-burcu.umutk.me`**. Alan adı değişirse
+Şu an ayarlı: **`https://omer-burcu.vercel.app`**. Alan adı değişirse
 `src/config/wedding.ts` içinden güncelle — `npm run build` adresin
 herkese açık bir HTTPS adresi olup olmadığını denetler ve değilse uyarır.
 

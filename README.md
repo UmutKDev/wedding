@@ -5,6 +5,7 @@ veritabanı yok, abonelik yok — `dist/` klasörü herhangi bir statik hosting'
 atılıp çalışır.
 
 **Öne çıkanlar**
+
 - Hero'da tam ekran düğün arabası videosu (dikey kurgu, sessiz döngü)
 - Canlı geri sayım, takvime ekleme (.ics + Google), gömülü harita + üç
   navigasyon uygulamasına yol tarifi, oklu fotoğraf slider'ı + tam ekran
@@ -31,15 +32,15 @@ Tarayıcı: <http://localhost:5173>
 
 ## Neyi nereden değiştiririm
 
-| İstediğin | Dosya |
-|---|---|
-| İsim, tarih, saat, mekân, adres, etkinlikler, anılar… | **`src/config/wedding.ts`** |
-| Arayüzdeki sabit yazılar ("Kaydırın", "Yol Tarifi"…) | `src/content/tr.ts` |
-| Renkler, fontlar, boşluk ölçüleri | `src/styles/index.css` (`@theme` bloğu) |
-| Bölümlerin sırası veya hangisinin görüneceği | `src/App.tsx` |
-| Video ve müzik | `src/media/` → [ASSETS.md](ASSETS.md) |
-| Fotoğraflar | `public/photos/` → [ASSETS.md](ASSETS.md) |
-| Paylaşım kartı (WhatsApp önizlemesi) | `python3 scripts/make-og-image.py` |
+| İstediğin                                             | Dosya                                     |
+| ----------------------------------------------------- | ----------------------------------------- |
+| İsim, tarih, saat, mekân, adres, etkinlikler, anılar… | **`src/config/wedding.ts`**               |
+| Arayüzdeki sabit yazılar ("Kaydırın", "Yol Tarifi"…)  | `src/content/tr.ts`                       |
+| Renkler, fontlar, boşluk ölçüleri                     | `src/styles/index.css` (`@theme` bloğu)   |
+| Bölümlerin sırası veya hangisinin görüneceği          | `src/App.tsx`                             |
+| Video ve müzik                                        | `src/media/` → [ASSETS.md](ASSETS.md)     |
+| Fotoğraflar                                           | `public/photos/` → [ASSETS.md](ASSETS.md) |
+| Paylaşım kartı (WhatsApp önizlemesi)                  | `python3 scripts/make-og-image.py`        |
 
 **Neredeyse her şey `src/config/wedding.ts` içinde.** Bölüm bileşenlerinin
 içine sabit metin yazılmadı; bilgi değiştiğinde tek dosyaya dokunulur.
@@ -62,11 +63,11 @@ erken başlangıcından en geç bitişine kadar uzanır.
 
 Bölümler verisi yoksa kendiliğinden gizlenir:
 
-| Bölüm | Gizlenme koşulu |
-|---|---|
-| Anılar | `gallery: []` |
-| Hikâye filmi / Reel | video dosyası yok |
-| İletişim (kapanışta) | `contact: []` |
+| Bölüm                | Gizlenme koşulu   |
+| -------------------- | ----------------- |
+| Anılar               | `gallery: []`     |
+| Hikâye filmi / Reel  | video dosyası yok |
+| İletişim (kapanışta) | `contact: []`     |
 
 Sayfa şu sırayla akar:
 **Hero → Geri Sayım → Ne Zaman/Nerede → Anılar → (varsa filmler) → Kapanış**
@@ -82,21 +83,26 @@ cevaplanıyor, ayrı bir "Mekân" bölümü yok.
 `dist/` klasörü tamamen bağımsızdır.
 
 ### Vercel
+
 ```bash
 npm i -g vercel && vercel
 ```
+
 `vercel.json` hazır (SPA yönlendirmesi + önbellek başlıkları).
 
 ### Netlify
+
 Repoyu bağla ya da `dist/` klasörünü sürükle-bırak. `netlify.toml` hazır.
 
 ### Başka bir yer
+
 ```bash
 npm run build
 ```
+
 Oluşan `dist/` klasörünü sunucuya kopyala.
 
-> Alan adı **`omer-burcu.umutk.me`** olarak ayarlı
+> Alan adı **`omer-burcu.vercel.app`** olarak ayarlı
 > (`src/config/wedding.ts` → `siteUrl`). Paylaş düğmesi, takvim kaydı ve
 > **paylaşım kartının tamamı** bunu kullanıyor: Open Graph mutlak URL
 > ister, yanlışsa WhatsApp önizlemesi boş çıkar. Adres değişirse orayı
@@ -152,12 +158,12 @@ state'e bağlamak her karede yeniden render tetikler. Değerler
 Cihaz otomatik sınıflandırılır (`src/three/perf.ts`); kare hızı düşerse
 çalışma anında bir kademe iner.
 
-| Kademe | Partikül | DPR |
-|---|---|---|
-| `high` | 12.000 | ≤2 |
-| `medium` | 5.000 | ≤1.75 |
-| `low` | 1.500 | ≤1.25 |
-| `none` | WebGL yok / hareket azaltma → sahne hiç kurulmaz | |
+| Kademe   | Partikül                                         | DPR   |
+| -------- | ------------------------------------------------ | ----- |
+| `high`   | 12.000                                           | ≤2    |
+| `medium` | 5.000                                            | ≤1.75 |
+| `low`    | 1.500                                            | ≤1.25 |
+| `none`   | WebGL yok / hareket azaltma → sahne hiç kurulmaz |       |
 
 Son işleme zinciri (bloom, vinyet) bilinçli olarak yok: açık temada
 bantlanma üretiyordu ve kenar yumuşatmanın (her kademede açık) getirdiği

@@ -311,8 +311,9 @@ function Lightbox({ items, index, onClose, onNavigate }: LightboxProps) {
             className="flex items-center justify-between px-4"
             style={{ paddingTop: 'calc(0.75rem + env(safe-area-inset-top))' }}
           >
+            {/* "1 / 1" bilgi taşımaz — tek fotoğrafta sayaç gösterilmez. */}
             <span className="text-ink-faint text-[0.75rem] tracking-[0.2em] tabular-nums">
-              {tr.gallery.counter(index + 1, items.length)}
+              {items.length > 1 ? tr.gallery.counter(index + 1, items.length) : ''}
             </span>
             <button
               ref={closeButton}
@@ -343,17 +344,26 @@ function Lightbox({ items, index, onClose, onNavigate }: LightboxProps) {
             className="flex items-center justify-between gap-4 px-4"
             style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom))' }}
           >
-            <button type="button" onClick={() => go(-1)} aria-label={tr.gallery.prev} className="tap text-ink">
-              <Chevron direction="left" />
-            </button>
+            {/*
+              Gezinme okları yalnızca gidilecek başka fotoğraf varsa.
+              Tek fotoğrafta `go()` modulo 1 yüzünden hep aynı kareye
+              döner — hiçbir şey yapmayan iki düğme kalırdı.
+            */}
+            {items.length > 1 && (
+              <button type="button" onClick={() => go(-1)} aria-label={tr.gallery.prev} className="tap text-ink">
+                <Chevron direction="left" />
+              </button>
+            )}
 
             {item.caption && (
               <p className="text-ink-dim flex-1 text-center text-[0.8125rem]">{item.caption}</p>
             )}
 
-            <button type="button" onClick={() => go(1)} aria-label={tr.gallery.next} className="tap text-ink">
-              <Chevron direction="right" />
-            </button>
+            {items.length > 1 && (
+              <button type="button" onClick={() => go(1)} aria-label={tr.gallery.next} className="tap text-ink">
+                <Chevron direction="right" />
+              </button>
+            )}
           </div>
         </motion.div>
       )}

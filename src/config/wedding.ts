@@ -13,51 +13,51 @@
 
 export interface Venue {
   /** Mekânın görünen adı */
-  name: string
+  name: string;
   /** Sokak/cadde satırı */
-  address: string
+  address: string;
   /** İlçe */
-  district: string
+  district: string;
   /** Şehir */
-  city: string
+  city: string;
   /** Haritada gösterilecek koordinat */
-  lat: number
-  lng: number
+  lat: number;
+  lng: number;
   /** Misafirlere kısa yön tarifi notu (opsiyonel) */
-  note?: string
+  note?: string;
 }
 
 export interface WeddingEvent {
-  id: string
+  id: string;
   /** "Nikah Töreni", "Düğün" gibi */
-  label: string
+  label: string;
   /** ISO 8601 + saat dilimi */
-  startsAt: string
+  startsAt: string;
   /** Bitiş — takvim dosyası (.ics) için. Boşsa +4 saat varsayılır. */
-  endsAt?: string
+  endsAt?: string;
   /** Kendi mekânı varsa; yoksa ana mekân kullanılır. */
-  venue?: Venue
-  description?: string
+  venue?: Venue;
+  description?: string;
 }
 
 export interface GalleryItem {
   /** /public/photos/memories/ altındaki dosya yolu */
-  src: string
-  alt: string
+  src: string;
+  alt: string;
   /** Işıklı görünümde (lightbox) gösterilecek açıklama */
-  caption?: string
+  caption?: string;
 }
 
 export interface Person {
-  first: string
-  last: string
+  first: string;
+  last: string;
   /** Davetiyede anılacaksa anne-baba adı */
-  parents?: string
+  parents?: string;
 }
 
 export interface Contact {
-  label: string
-  tel: string
+  label: string;
+  tel: string;
 }
 
 /**
@@ -70,33 +70,33 @@ export interface Contact {
  */
 export interface WeddingConfig {
   couple: {
-    groom: Person
-    bride: Person
-    order: readonly ['groom' | 'bride', 'groom' | 'bride']
-  }
+    groom: Person;
+    bride: Person;
+    order: readonly ["groom" | "bride", "groom" | "bride"];
+  };
   /** Geri sayımın hedeflediği an — ISO 8601 + saat dilimi */
-  countdownTarget: string
-  venue: Venue
-  events: WeddingEvent[]
-  gallery: GalleryItem[]
-  contact: Contact[]
+  countdownTarget: string;
+  venue: Venue;
+  events: WeddingEvent[];
+  gallery: GalleryItem[];
+  contact: Contact[];
   /** Paylaşım bağlantısı — deploy sonrası gerçek adres */
-  siteUrl: string
+  siteUrl: string;
 }
 
 // ─────────────────────────────────────────────────────────────────────────
 //  MEKÂN
 // ─────────────────────────────────────────────────────────────────────────
 const mainVenue: Venue = {
-  name: 'Kavaklık Şato Restaurant',
-  address: 'Sarıgüllük Mah., 100. Yıl Parkı içi, Masal Parkı yanı',
-  district: 'Şehitkamil',
-  city: 'Gaziantep',
+  name: "Kavaklık Şato Restaurant",
+  address: "Sarıgüllük Mah., 100. Yıl Parkı içi, Masal Parkı yanı",
+  district: "Şehitkamil",
+  city: "Gaziantep",
   // Google Maps paylaşım linkinden çözülen tam koordinat.
   lat: 37.0630779,
   lng: 37.356708,
-  note: 'Mekân 100. Yıl Parkı’nın içinde, Masal Parkı’nın yanındadır.',
-}
+  note: "Mekân 100. Yıl Parkı’nın içinde, Masal Parkı’nın yanındadır.",
+};
 
 // ─────────────────────────────────────────────────────────────────────────
 //  DAVETİYE
@@ -105,25 +105,25 @@ export const wedding: WeddingConfig = {
   /** Çift */
   couple: {
     groom: {
-      first: 'Ömer',
-      last: 'Çevikbaş',
+      first: "Ömer",
+      last: "Çevikbaş",
       /** Davetiyede anılacaksa anne-baba adı, yoksa boş bırakın */
-      parents: '',
+      parents: "",
     },
     bride: {
-      first: 'Burcu',
-      last: 'Bozgeyik',
-      parents: '',
+      first: "Burcu",
+      last: "Bozgeyik",
+      parents: "",
     },
     /** Hero'da isimlerin sırası */
-    order: ['groom', 'bride'],
+    order: ["groom", "bride"],
   },
 
   /**
    * GERİ SAYIMIN hedeflediği an ve sayfa başlıklarında görünen ana tarih.
    * Genelde düğün/nikah başlangıcıdır.
    */
-  countdownTarget: '2026-09-20T19:00:00+03:00', // TODO: saat
+  countdownTarget: "2026-09-20T19:00:00+03:00",
 
   /** Ana mekân */
   venue: mainVenue,
@@ -138,10 +138,10 @@ export const wedding: WeddingConfig = {
    */
   events: [
     {
-      id: 'dugun',
-      label: 'Düğün',
-      startsAt: '2026-09-20T20:00:00+03:00', // TODO: saat
-      endsAt: '2026-09-21T00:30:00+03:00', // TODO: saat
+      id: "dugun",
+      label: "Düğün",
+      startsAt: "2026-09-20T19:00:00+03:00",
+      endsAt: "2026-09-21T00:30:00+03:00", // TODO: saat
       // Açıklama bilinçli olarak yok: kartta yalnızca saat duruyor.
     },
   ],
@@ -157,14 +157,9 @@ export const wedding: WeddingConfig = {
    */
   gallery: [
     {
-      src: '/photos/memories/01.jpg',
-      alt: 'Ömer ve Burcu birbirlerine nişan pastası yedirirken',
-      caption: 'Nişanımız',
-    },
-    {
-      src: '/photos/memories/02.jpg',
-      alt: 'Ömer ve Burcu nişan pastalarının başında poz verirken',
-      caption: 'Nişanımız',
+      src: "/photos/memories/02.jpg",
+      alt: "Ömer ve Burcu nişan pastalarının başında poz verirken",
+      caption: "Nişanımız",
     },
   ],
 
@@ -183,7 +178,7 @@ export const wedding: WeddingConfig = {
    * build sırasında buradan üretilir. Yanlışsa WhatsApp önizlemesi
    * sessizce boş çıkar.
    */
-  siteUrl: 'https://omer-burcu.umutk.me',
-}
+  siteUrl: "https://omer-burcu.vercel.app",
+};
 
-export type Wedding = typeof wedding
+export type Wedding = typeof wedding;

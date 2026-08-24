@@ -1,11 +1,11 @@
-import { createHash } from 'node:crypto'
-import { readFileSync } from 'node:fs'
-import { fileURLToPath, URL } from 'node:url'
-import { defineConfig, type Plugin } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+import { fileURLToPath, URL } from "node:url";
+import { defineConfig, type Plugin } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 
-import { wedding } from './src/config/wedding'
+import { wedding } from "./src/config/wedding";
 
 /**
  * Paylaşım (Open Graph) meta etiketlerini `src/config/wedding.ts`'ten üretir.
@@ -27,9 +27,9 @@ import { wedding } from './src/config/wedding'
  */
 function socialMeta(): Plugin {
   return {
-    name: 'wedding-social-meta',
+    name: "wedding-social-meta",
     transformIndexHtml(html) {
-      const site = wedding.siteUrl.replace(/\/+$/, '')
+      const site = wedding.siteUrl.replace(/\/+$/, "");
 
       /*
        * `siteUrl` taşıyıcı bir değer: yanlışsa paylaşım kartı sessizce
@@ -41,74 +41,78 @@ function socialMeta(): Plugin {
        * bakar: önizleme botları yalnızca herkese açık HTTPS adreslerinden
        * görsel çeker.
        */
-      if (!/^https:\/\/[^/\s]+\.[^/\s]+$/.test(site) || /localhost|127\.0\.0\.1|example\./.test(site)) {
+      if (
+        !/^https:\/\/[^/\s]+\.[^/\s]+$/.test(site) ||
+        /localhost|127\.0\.0\.1|example\./.test(site)
+      ) {
         this.warn(
           `siteUrl paylaşım kartı için uygun görünmüyor: "${site}". ` +
-            'Herkese açık bir HTTPS adresi olmalı (ör. https://omer-burcu.umutk.me). ' +
-            'Aksi hâlde WhatsApp/X önizlemesi boş çıkar.',
-        )
+            "Herkese açık bir HTTPS adresi olmalı (ör. https://omer-burcu.vercel.app). " +
+            "Aksi hâlde WhatsApp/X önizlemesi boş çıkar.",
+        );
       }
 
-      let stamp = ''
+      let stamp = "";
       try {
-        const bytes = readFileSync('public/og/preview.jpg')
-        stamp = '?v=' + createHash('sha256').update(bytes).digest('hex').slice(0, 8)
+        const bytes = readFileSync("public/og/preview.jpg");
+        stamp =
+          "?v=" + createHash("sha256").update(bytes).digest("hex").slice(0, 8);
       } catch {
         // Görsel henüz eklenmemiş — etiketler yine de geçerli kalsın.
       }
 
-      const date = new Intl.DateTimeFormat('tr-TR', {
-        timeZone: 'Europe/Istanbul',
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-      }).format(new Date(wedding.countdownTarget))
+      const date = new Intl.DateTimeFormat("tr-TR", {
+        timeZone: "Europe/Istanbul",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }).format(new Date(wedding.countdownTarget));
 
-      const { groom, bride } = wedding.couple
-      const couple = `${groom.first} & ${bride.first}`
+      const { groom, bride } = wedding.couple;
+      const couple = `${groom.first} & ${bride.first}`;
 
       const values: Record<string, string> = {
-        '%OG_URL%': `${site}/`,
-        '%OG_IMAGE%': `${site}/og/preview.jpg${stamp}`,
-        '%OG_TITLE%': `${couple} — Evleniyoruz`,
-        '%OG_DESC%':
+        "%OG_URL%": `${site}/`,
+        "%OG_IMAGE%": `${site}/og/preview.jpg${stamp}`,
+        "%OG_TITLE%": `${couple} — Evleniyoruz`,
+        "%OG_DESC%":
           `${date} · ${wedding.venue.city}. ` +
           `${groom.first} ${groom.last} ve ${bride.first} ${bride.last}'in düğününe davetlisiniz.`,
-        '%OG_ALT%': `${couple} — ${date} tarihli düğün davetiyesi`,
-      }
+        "%OG_ALT%": `${couple} — ${date} tarihli düğün davetiyesi`,
+      };
 
-      return html.replace(/%OG_[A-Z]+%/g, (key) => values[key] ?? key)
+      return html.replace(/%OG_[A-Z]+%/g, (key) => values[key] ?? key);
     },
-  }
+  };
 }
 
 export default defineConfig({
   // Vercel / Netlify kök dizinde yayınlar.
-  base: '/',
+  base: "/",
   plugins: [react(), tailwindcss(), socialMeta()],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
   build: {
-    target: 'es2022',
-    cssTarget: 'safari16',
+    target: "es2022",
+    cssTarget: "safari16",
     assetsInlineLimit: 2048,
     // Ağır 3B paketi ön yüklemeden çıkar. `modulepreload` yüksek öncelikli
     // indirir ve ilk saniyelerde fontlarla yarışır; oysa sahneye ancak
     // yükleme ekranı bittikten sonra ihtiyaç var.
     modulePreload: {
       resolveDependencies: (_url: string, deps: string[]) =>
-        deps.filter((dep) => !dep.includes('three-')),
+        deps.filter((dep) => !dep.includes("three-")),
     },
     rollupOptions: {
       output: {
         // three + drei ayrı chunk: açılış ekranı görünürken arka planda
         // yüklenir, ilk boyamayı bloklamaz.
         manualChunks(id: string) {
-          if (!id.includes('node_modules')) return
-          if (/[\\/](three|@react-three)[\\/]/.test(id)) return 'three'
+          if (!id.includes("node_modules")) return;
+          if (/[\\/](three|@react-three)[\\/]/.test(id)) return "three";
         },
       },
     },
@@ -116,4 +120,4 @@ export default defineConfig({
   server: {
     host: true,
   },
-})
+});

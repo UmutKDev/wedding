@@ -47,7 +47,7 @@ function socialMeta(): Plugin {
       ) {
         this.warn(
           `siteUrl paylaşım kartı için uygun görünmüyor: "${site}". ` +
-            "Herkese açık bir HTTPS adresi olmalı (ör. https://omer-burcu.vercel.app). " +
+            "Herkese açık bir HTTPS adresi olmalı (ör. https://burcu-omer.vercel.app). " +
             "Aksi hâlde WhatsApp/X önizlemesi boş çıkar.",
         );
       }

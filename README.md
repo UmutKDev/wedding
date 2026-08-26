@@ -102,7 +102,7 @@ npm run build
 
 Oluşan `dist/` klasörünü sunucuya kopyala.
 
-> Alan adı **`omer-burcu.vercel.app`** olarak ayarlı
+> Alan adı **`burcu-omer.vercel.app`** olarak ayarlı
 > (`src/config/wedding.ts` → `siteUrl`). Paylaş düğmesi, takvim kaydı ve
 > **paylaşım kartının tamamı** bunu kullanıyor: Open Graph mutlak URL
 > ister, yanlışsa WhatsApp önizlemesi boş çıkar. Adres değişirse orayı

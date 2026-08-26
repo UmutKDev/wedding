@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from 'motion/react'
 
-import { wedding } from '../config/wedding'
+import { coupleOrder } from '../config/wedding'
 
 interface MonogramProps {
   size?: number
@@ -10,7 +10,10 @@ interface MonogramProps {
 }
 
 /**
- * "Ö & B" monogramı — iki halka ve baş harfler.
+ * Baş harf monogramı — iki halka ve iki harf.
+ *
+ * Harf sırası `couple.order`'dan gelir (bkz. wedding.ts → coupleOrder),
+ * yani hero'daki isim sırasıyla her zaman aynı kalır.
  *
  * Harfler SVG metni olarak çizilir, `stroke-dasharray` ile "kalemle
  * yazılıyormuş" gibi belirir. Yükleme ekranında ve kapanışta kullanılır.
@@ -19,9 +22,9 @@ export function Monogram({ size = 92, animate = false, className = '' }: Monogra
   const reduced = useReducedMotion()
   const shouldAnimate = animate && !reduced
 
-  const groom = wedding.couple.groom.first.charAt(0)
-  const bride = wedding.couple.bride.first.charAt(0)
-  const label = `${groom} & ${bride}`
+  const first = coupleOrder[0].first.charAt(0)
+  const second = coupleOrder[1].first.charAt(0)
+  const label = `${first} & ${second}`
 
   const draw = (delay: number) =>
     shouldAnimate
@@ -84,12 +87,12 @@ export function Monogram({ size = 92, animate = false, className = '' }: Monogra
         transition={{ duration: 0.8, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
         aria-hidden="true"
       >
-        {groom}
+        {first}
         <tspan style={{ fontStyle: 'italic', fontSize: 20 }} dx="4" dy="-2">
           &amp;
         </tspan>
         <tspan dx="4" dy="2">
-          {bride}
+          {second}
         </tspan>
       </motion.text>
     </svg>

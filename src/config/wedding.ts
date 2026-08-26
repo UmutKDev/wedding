@@ -178,7 +178,7 @@ export const wedding: WeddingConfig = {
    * build sırasında buradan üretilir. Yanlışsa WhatsApp önizlemesi
    * sessizce boş çıkar.
    */
-  siteUrl: "https://omer-burcu.vercel.app",
+  siteUrl: "https://burcu-omer.vercel.app",
 };
 
 export type Wedding = typeof wedding;

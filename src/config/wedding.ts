@@ -116,7 +116,7 @@ export const wedding: WeddingConfig = {
       parents: "",
     },
     /** Hero'da isimlerin sırası */
-    order: ["groom", "bride"],
+    order: ["bride", "groom"],
   },
 
   /**
@@ -182,3 +182,17 @@ export const wedding: WeddingConfig = {
 };
 
 export type Wedding = typeof wedding;
+
+/**
+ * İsimler SIRAYLA burada. Hero, paylaşım kartı, takvim kaydı ve manifest
+ * hep bunu okur — sırayı değiştirmek için tek dokunulacak yer yukarıdaki
+ * `couple.order`.
+ *
+ * ⚠️ `scripts/make-og-image.py` bu dosyayı okuyamaz (Python). Kapak
+ *    görselindeki sıra orada `NAME_ORDER` olarak elle duruyor; `order`
+ *    değişirse onu da güncelle, yoksa kart görseli başlığıyla çelişir.
+ */
+export const coupleOrder: readonly [Person, Person] = [
+  wedding.couple[wedding.couple.order[0]],
+  wedding.couple[wedding.couple.order[1]],
+];

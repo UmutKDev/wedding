@@ -24,7 +24,7 @@ Bu üç şeyi baştan aklında tut:
 3. **Yazı koyma.** İsim ve tarih zaten sitenin kendi tipografisiyle,
    videonun üstünde net biçimde yazılıyor. Videonun içine gömülü yazı hem
    çift görünür hem de küçük ekranda okunmaz.
-   *(Tek istisna: hero videosundaki araba plakası — o kasıtlı.)*
+   _(Tek istisna: hero videosundaki araba plakası — o kasıtlı.)_
 
 ---
 
@@ -63,20 +63,21 @@ and orange grade, heavy vignette, crushed blacks
 **Nerede:** Ana ekranda, isimlerin ve tarihin arkasında; **sessiz**, sonsuz
 döner. Sayfayı açan herkesin gördüğü ilk hareketli görüntü budur.
 
-| | |
-|---|---|
-| Dosya | `src/media/hero-loop.mp4` (+ **`hero-loop-portrait.mp4` — çok önemli**) |
-| Oran | 16:9 + 9:16 |
-| Süre | **8–12 sn**, kusursuz döngü |
-| Ses | **Yok** (sessiz oynatılır) |
-| Poster | `hero-loop.jpg` |
-| Hedef boyut | **< 3 MB** — her ziyarette indirilir |
+|             |                                                                         |
+| ----------- | ----------------------------------------------------------------------- |
+| Dosya       | `src/media/hero-loop.mp4` (+ **`hero-loop-portrait.mp4` — çok önemli**) |
+| Oran        | 16:9 + 9:16                                                             |
+| Süre        | **8–12 sn**, kusursuz döngü                                             |
+| Ses         | **Yok** (sessiz oynatılır)                                              |
+| Poster      | `hero-loop.jpg`                                                         |
+| Hedef boyut | **< 3 MB** — her ziyarette indirilir                                    |
 
 **Konsept:** Yukarıdan hafif eğik (drone/vinç) bir açıyla, sakin bir yolda
 ilerleyen **klasik/vintage bir düğün arabası**. İçinde gelin ve damat.
-Arka plakada **ÖMER & BURCU** yazıyor. Kamera arabanın hızına eşlik ediyor.
+Arka plakada **Burcu & Ömer** yazıyor. Kamera arabanın hızına eşlik ediyor.
 
 **Kompozisyon uyarıları:**
+
 - Arabayı **karenin ortasında** tut — dikey varyant üretmezsen 16:9 video
   telefonda merkezden kırpılır ve kenardaki araba kadraj dışında kalır.
 - Üst üçlük **boş ve açık** kalsın; isimler ve tarih oraya biniyor.
@@ -91,7 +92,7 @@ cream-coloured wedding convertible driving slowly along a quiet tree-lined
 country road on a bright sunny afternoon. A bride in a white dress and a
 groom in a dark suit are visible sitting inside. White satin ribbons tied
 to the bonnet and a small ivory floral arrangement. The rear licence plate
-is clearly legible and reads exactly "ÖMER & BURCU" in bold black capital
+is clearly legible and reads exactly "Burcu & Ömer" in bold black capital
 letters on a clean white plate, filling a good portion of the frame.
 The camera glides smoothly at the same speed as the car, keeping it
 centered. Bright airy high-key lighting, ivory and cream palette, warm
@@ -99,6 +100,7 @@ natural daylight, low contrast, lifted shadows, no crushed blacks.
 35mm, shallow depth of field, fine film grain. Seamless loop — first and
 last frame identical. No text overlays. 10 seconds.
 ```
+
 </details>
 
 <details>
@@ -113,7 +115,7 @@ a bride in white and a groom in a dark suit, seen from behind. White
 ribbons on the bonnet, ivory flowers.
 
 CRITICAL DETAIL: the rear licence plate must be sharp, well-lit and
-clearly readable, showing exactly the text "ÖMER & BURCU" in black
+clearly readable, showing exactly the text "Burcu & Ömer" in black
 capital letters on a white plate. Keep the plate large in frame.
 
 The car stays centered in the frame at all times; the upper third of the
@@ -122,6 +124,7 @@ highlights, warm daylight, low contrast, lifted shadows, no crushed
 blacks. 35mm, shallow depth of field, fine grain. First and last frame
 must match exactly for a perfect loop. No text overlays.
 ```
+
 </details>
 
 <details>
@@ -131,7 +134,7 @@ must match exactly for a perfect loop. No text overlays.
 Prompt: High angle aerial shot following a classic vintage cream wedding
 convertible driving slowly on a sunny tree-lined road. Bride in white and
 groom in dark suit inside. White ribbons and ivory flowers on the bonnet.
-Rear licence plate clearly readable with the text "ÖMER & BURCU" in black
+Rear licence plate clearly readable with the text "Burcu & Ömer" in black
 capitals on a white plate. Smooth tracking camera at car speed, car
 centered, upper third of frame open and bright. Bright airy high-key
 lighting, ivory and cream palette, warm daylight, low contrast.
@@ -141,6 +144,7 @@ Negative prompt: dark, moody, night, high contrast, crushed blacks, heavy
 vignette, neon, teal and orange, text overlay, watermark, distorted
 letters, gibberish text, blurry licence plate, fast motion, jump cuts
 ```
+
 </details>
 
 <details>
@@ -157,10 +161,11 @@ hareketi yeterli) ya da çok hafif bir **Push Out** ver.
 ```
 Classic vintage cream wedding convertible driving slowly along a sunny
 tree-lined road, seen from a high angle behind. Bride and groom inside,
-white ribbons on the bonnet. Rear licence plate reads "ÖMER & BURCU".
+white ribbons on the bonnet. Rear licence plate reads "Burcu & Ömer".
 Bright airy high-key lighting, ivory and cream palette, warm daylight,
 low contrast, lifted shadows. Smooth continuous motion.
 ```
+
 </details>
 
 <details>
@@ -173,15 +178,16 @@ Seamless looping aerial shot from slightly above and behind a classic
 vintage cream wedding convertible driving on a quiet sunny tree-lined
 road. Bride in white and groom in a dark suit inside. White ribbons and
 ivory flowers on the bonnet. The rear licence plate clearly reads
-"ÖMER & BURCU" in black capitals on a white plate. Camera follows at the
+"Burcu & Ömer" in black capitals on a white plate. Camera follows at the
 same speed, car stays centered. Bright airy ivory and cream palette, warm
 daylight, low contrast, no crushed blacks. 35mm, shallow focus, fine grain.
 ```
+
 </details>
 
 ### 🚨 Plaka yazısı — en çok bozulan şey
 
-AI video araçlarının **en zayıf olduğu konu metin üretmek.** "ÖMER & BURCU"
+AI video araçlarının **en zayıf olduğu konu metin üretmek.** "Burcu & Ömer"
 büyük ihtimalle ilk denemede "OMFR & BURCU", "ÖMFR 8 BURCLI" gibi bozuk
 çıkacak. Buna hazırlıklı ol:
 
@@ -192,8 +198,8 @@ büyük ihtimalle ilk denemede "OMFR & BURCU", "ÖMFR 8 BURCLI" gibi bozuk
 3. **En garantili yol: plakayı sonradan ekle.** Video hazır olduğunda
    plakayı düz bir dikdörtgen olarak boyayıp üstüne yazıyı yerleştirmek,
    onlarca kez yeniden üretmekten çok daha hızlıdır. Runway'in
-   *Inpainting* aracı, Photoshop'un video katmanları ya da CapCut'ın
-   *tracker* özelliği bu işi görür.
+   _Inpainting_ aracı, Photoshop'un video katmanları ya da CapCut'ın
+   _tracker_ özelliği bu işi görür.
 4. **Alternatif:** Plakayı hiç zorlama, arabanın **arka camına** asılı
    klasik "JUST MARRIED" tabelası iste — AI o kalıbı çok daha iyi biliyor.
 
@@ -220,14 +226,14 @@ ffmpeg -i hero-loop.mp4 -filter_complex \
 
 **Nerede:** Misafir "Davetiyeyi Aç" mührüne dokununca tam ekran, **sesli** oynar.
 
-| | |
-|---|---|
-| Dosya | `src/media/intro.mp4` (+ opsiyonel `intro-portrait.mp4`) |
-| Oran | 16:9 — dikey varyant önerilir |
-| Süre | **15–25 sn** |
-| Ses | Var |
-| Poster | `intro.jpg` |
-| Hedef boyut | < 8 MB |
+|             |                                                          |
+| ----------- | -------------------------------------------------------- |
+| Dosya       | `src/media/intro.mp4` (+ opsiyonel `intro-portrait.mp4`) |
+| Oran        | 16:9 — dikey varyant önerilir                            |
+| Süre        | **15–25 sn**                                             |
+| Ses         | Var                                                      |
+| Poster      | `intro.jpg`                                              |
+| Hedef boyut | < 8 MB                                                   |
 
 **Ne istiyoruz:** Aydınlık, ferah bir açılış. Beyaz güller, tül, gün ışığı,
 altın yüzükler. Sonu **açık ve parlak** kapansın — hemen ardından sitenin
@@ -248,6 +254,7 @@ natural daylight, low contrast, lifted shadows, no crushed blacks.
 35mm, shallow depth of field, fine film grain, very slow elegant camera
 movement. No people, no text, no faces.
 ```
+
 </details>
 
 <details>
@@ -262,6 +269,7 @@ contrast, shallow depth of field, film grain, very slow movement.
 Negative prompt: dark, night, moody, high contrast, crushed blacks, neon,
 people, faces, text, watermark, fast motion
 ```
+
 </details>
 
 ---
@@ -271,14 +279,14 @@ people, faces, text, watermark, fast motion
 **Nerede:** "Bizden Bir Parça" bölümünde, altın çerçeve içinde. Dokununca
 **sesli** oynar. Sayfanın duygusal merkezi.
 
-| | |
-|---|---|
-| Dosya | `src/media/story.mp4` |
-| Oran | 16:9 |
-| Süre | **30–90 sn** |
-| Ses | Var |
-| Poster | `story.jpg` |
-| Hedef boyut | < 15 MB |
+|             |                       |
+| ----------- | --------------------- |
+| Dosya       | `src/media/story.mp4` |
+| Oran        | 16:9                  |
+| Süre        | **30–90 sn**          |
+| Ses         | Var                   |
+| Poster      | `story.jpg`           |
+| Hedef boyut | < 15 MB               |
 
 **Ne istiyoruz:** Burası aslında **sizin gerçek görüntüleriniz için**.
 Nişan videosu, dış çekim, telefonla çekilmiş anlar… AI ile üretmek yerine
@@ -304,14 +312,14 @@ görünümünü videoya taşıyan asıl ayar budur.
 
 # 4️⃣ `reel` — Dikey Reel
 
-| | |
-|---|---|
-| Dosya | `src/media/reel.mp4` |
-| Oran | **9:16 (dikey)** |
-| Süre | 15–30 sn |
-| Ses | Var |
-| Poster | `reel.jpg` |
-| Hedef boyut | < 6 MB |
+|             |                      |
+| ----------- | -------------------- |
+| Dosya       | `src/media/reel.mp4` |
+| Oran        | **9:16 (dikey)**     |
+| Süre        | 15–30 sn             |
+| Ses         | Var                  |
+| Poster      | `reel.jpg`           |
+| Hedef boyut | < 6 MB               |
 
 **Ne istiyoruz:** Instagram reel ritmi — hızlı, ritmik kesmeler, ama yine
 aydınlık ve ferah.
@@ -329,6 +337,7 @@ cuts on the beat. High-key lighting, ivory and cream palette, champagne
 gold accents, warm daylight, low contrast, no crushed blacks. Film grain,
 light editorial wedding aesthetic. No faces, no text.
 ```
+
 </details>
 
 ---
@@ -383,12 +392,12 @@ ffmpeg -i hero-loop.mp4 -vf "crop=ih*9/16:ih" -c:a copy hero-loop-portrait.mp4
 ls -lh src/media/
 ```
 
-| Slot | Hedef |
-|---|---|
-| `hero-loop` | < 3 MB |
-| `intro` | < 8 MB |
-| `reel` | < 6 MB |
-| `story` | < 15 MB |
+| Slot        | Hedef   |
+| ----------- | ------- |
+| `hero-loop` | < 3 MB  |
+| `intro`     | < 8 MB  |
+| `reel`      | < 6 MB  |
+| `story`     | < 15 MB |
 
 ---
 
@@ -405,7 +414,7 @@ ffmpeg -i sarki.wav -c:a libmp3lame -b:a 128k -ac 1 ambient.mp3
 ⚠️ **Telif:** Popüler bir şarkıyı siteye koymak teknik olarak çalışır ama
 telif ihlalidir. Telifsiz kaynaklar: [Pixabay Music](https://pixabay.com/music/),
 [Uppbeat](https://uppbeat.io), [Epidemic Sound](https://www.epidemicsound.com) (ücretli).
-Arama önerisi: *"romantic cinematic piano"*, *"light acoustic wedding"*.
+Arama önerisi: _"romantic cinematic piano"_, _"light acoustic wedding"_.
 
 ---
 

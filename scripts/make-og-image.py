@@ -21,8 +21,14 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageFilter
 # ── İçerik ────────────────────────────────────────────────────────────
 EYEBROW = "EVLENİYORUZ"
 GROOM = "Ömer"
-AMP = "&"
 BRIDE = "Burcu"
+AMP = "&"
+
+# Kartta hangi isim üstte duracak.
+# ⚠️ index.html'deki `og:site_name` ve vite.config.ts'teki `%OG_TITLE%`
+#    ile AYNI sırada olmalı — görsel bir sırayı, altındaki başlık başka
+#    bir sırayı gösterirse kart kendi içinde çelişir.
+NAME_ORDER = (BRIDE, GROOM)
 DATE_LINE = "20 EYLÜL 2026 · PAZAR"
 CITY = "GAZİANTEP"
 SOURCE_PHOTO = "public/photos/memories/02.jpg"   # kameraya bakan kare
@@ -114,9 +120,9 @@ def build_og(out_path):
     y += 62
 
     for text, fnt, fill, gap in (
-        (GROOM, f_name, INK, 108),
+        (NAME_ORDER[0], f_name, INK, 108),
         (AMP, f_amp, GOLD, 62),
-        (BRIDE, f_name, INK, 118),
+        (NAME_ORDER[1], f_name, INK, 118),
     ):
         w = draw.textlength(text, font=fnt)
         draw.text((cx - w / 2, y), text, font=fnt, fill=fill)

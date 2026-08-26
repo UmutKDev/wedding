@@ -5,7 +5,7 @@ import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
-import { wedding } from "./src/config/wedding";
+import { coupleOrder, wedding } from "./src/config/wedding";
 
 /**
  * Paylaşım (Open Graph) meta etiketlerini `src/config/wedding.ts`'ten üretir.
@@ -68,8 +68,10 @@ function socialMeta(): Plugin {
         year: "numeric",
       }).format(new Date(wedding.countdownTarget));
 
-      const { groom, bride } = wedding.couple;
-      const couple = `${groom.first} & ${bride.first}`;
+      // Sıra `couple.order`'dan gelir; kapak görseli ve `og:site_name`
+      // de aynı sırayı gösterir (bkz. wedding.ts → coupleOrder).
+      const [a, b] = coupleOrder;
+      const couple = `${a.first} & ${b.first}`;
 
       const values: Record<string, string> = {
         "%OG_URL%": `${site}/`,
@@ -77,7 +79,7 @@ function socialMeta(): Plugin {
         "%OG_TITLE%": `${couple} — Evleniyoruz`,
         "%OG_DESC%":
           `${date} · ${wedding.venue.city}. ` +
-          `${groom.first} ${groom.last} ve ${bride.first} ${bride.last}'in düğününe davetlisiniz.`,
+          `${a.first} ${a.last} ve ${b.first} ${b.last}'in düğününe davetlisiniz.`,
         "%OG_ALT%": `${couple} — ${date} tarihli düğün davetiyesi`,
       };
 

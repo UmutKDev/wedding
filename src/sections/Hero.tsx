@@ -1,52 +1,52 @@
-import { motion, useReducedMotion } from 'motion/react'
+import { motion, useReducedMotion } from "motion/react";
 
-import { BackgroundVideo } from '../components/BackgroundVideo'
-import { media } from '../config/media'
-import { wedding } from '../config/wedding'
-import { tr } from '../content/tr'
-import { formatFullDate } from '../lib/format'
+import { BackgroundVideo } from "../components/BackgroundVideo";
+import { media } from "../config/media";
+import { coupleOrder, wedding } from "../config/wedding";
+import { tr } from "../content/tr";
+import { formatFullDate } from "../lib/format";
 
-const EASE = [0.22, 1, 0.36, 1] as const
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 /**
  * Açılış ekranı.
  *
  * 📱 Dikey kompozisyon: 3B yüzükler kameranın kadrajlamasıyla üst üçlüğe
  * oturur, isimler alt yarıda durur. İsimler alt alta dizilir — hem klasik
- * davetiye düzeni budur hem de dar ekranda "Ömer & Burcu" tek satırda
+ * davetiye düzeni budur hem de dar ekranda "Burcu & Ömer" tek satırda
  * sıkışmak zorunda kalmaz.
  */
 export function Hero() {
-  const reduced = useReducedMotion()
-  const { groom, bride } = wedding.couple
+  const reduced = useReducedMotion();
+  const [firstName, secondName] = coupleOrder;
 
   const rise = (delay: number) =>
     reduced
       ? {}
       : {
-          initial: { opacity: 0, y: 26, filter: 'blur(10px)' },
-          animate: { opacity: 1, y: 0, filter: 'blur(0px)' },
+          initial: { opacity: 0, y: 26, filter: "blur(10px)" },
+          animate: { opacity: 1, y: 0, filter: "blur(0px)" },
           transition: { duration: 1.1, delay, ease: EASE },
-        }
+        };
 
   /*
    * 📐 KADRAJ KARARI
    *
    * Hero videosu (yolda giden düğün arabası) kendi içinde net bir
    * kompozisyona sahip: üst yarı boş yol ve ağaçlar, alt yarı araba —
-   * ve arabanın plakasında zaten "ÖMER & BURCU" yazıyor.
+   * ve arabanın plakasında zaten "Burcu & Ömer" yazıyor.
    *
    * Metin bu yüzden ÜSTTE. Aşağıda dururken tam plakanın üstüne biniyor
    * ve videonun en güzel detayını, aynı kelimelerle kapatıyordu. Üstte
    * ise boş yola oturuyor, araba ve plaka tamamen açıkta kalıyor.
    */
-  const hasVideo = media.heroLoop.enabled
+  const hasVideo = media.heroLoop.enabled;
 
   return (
     <section
       id="hero"
       className={`relative flex min-h-dvh flex-col overflow-hidden ${
-        hasVideo ? 'justify-start' : 'justify-end'
+        hasVideo ? "justify-start" : "justify-end"
       }`}
     >
       {/*
@@ -80,12 +80,12 @@ export function Hero() {
       */}
       <div
         className={`pointer-events-none absolute inset-x-0 z-10 h-[72%] ${
-          hasVideo ? 'top-0' : 'bottom-0'
+          hasVideo ? "top-0" : "bottom-0"
         }`}
         style={{
           background: hasVideo
-            ? 'linear-gradient(180deg, rgba(250,247,242,0.96) 0%, rgba(250,247,242,0.9) 38%, rgba(250,247,242,0.66) 62%, rgba(250,247,242,0) 100%)'
-            : 'linear-gradient(180deg, rgba(250,247,242,0) 0%, rgba(250,247,242,0.78) 42%, rgba(250,247,242,0.96) 100%)',
+            ? "linear-gradient(180deg, rgba(250,247,242,0.96) 0%, rgba(250,247,242,0.9) 38%, rgba(250,247,242,0.66) 62%, rgba(250,247,242,0) 100%)"
+            : "linear-gradient(180deg, rgba(250,247,242,0) 0%, rgba(250,247,242,0.78) 42%, rgba(250,247,242,0.96) 100%)",
         }}
       />
 
@@ -93,10 +93,10 @@ export function Hero() {
         className="section-x relative z-20 flex flex-col items-center gap-5 text-center sm:gap-7"
         style={
           hasVideo
-            ? { paddingTop: 'calc(3.5rem + env(safe-area-inset-top))' }
+            ? { paddingTop: "calc(3.5rem + env(safe-area-inset-top))" }
             : // Kaydırma ipucuna (yaklaşık 4rem) ve cihazın güvenli
               // alanına yer bırakır.
-              { paddingBottom: 'calc(8.5rem + env(safe-area-inset-bottom))' }
+              { paddingBottom: "calc(8.5rem + env(safe-area-inset-bottom))" }
         }
       >
         <motion.p className="eyebrow" {...rise(0.15)}>
@@ -108,7 +108,7 @@ export function Hero() {
             className="text-foil text-hero font-display block tracking-[0.03em]"
             {...rise(0.3)}
           >
-            {groom.first}
+            {firstName.first}
           </motion.span>
 
           <motion.span
@@ -123,7 +123,7 @@ export function Hero() {
             className="text-foil text-hero font-display block tracking-[0.03em]"
             {...rise(0.6)}
           >
-            {bride.first}
+            {secondName.first}
           </motion.span>
         </h1>
 
@@ -137,7 +137,10 @@ export function Hero() {
         */}
         <motion.div
           className="flex flex-col items-center gap-1.5"
-          style={{ textShadow: '0 1px 14px rgba(250,247,242,0.95), 0 0 4px rgba(250,247,242,0.9)' }}
+          style={{
+            textShadow:
+              "0 1px 14px rgba(250,247,242,0.95), 0 0 4px rgba(250,247,242,0.9)",
+          }}
           {...rise(0.95)}
         >
           <p className="text-ink text-lead font-display tracking-[0.14em]">
@@ -160,24 +163,24 @@ export function Hero() {
           className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[22%]"
           style={{
             background:
-              'linear-gradient(0deg, rgba(250,247,242,0.9) 0%, rgba(250,247,242,0.45) 45%, rgba(250,247,242,0) 100%)',
+              "linear-gradient(0deg, rgba(250,247,242,0.9) 0%, rgba(250,247,242,0.45) 45%, rgba(250,247,242,0) 100%)",
           }}
         />
       )}
 
       <ScrollHint />
     </section>
-  )
+  );
 }
 
 /** Aşağı kaydırma ipucu — dokunmatikte "Kaydırın", altın ince ok. */
 function ScrollHint() {
-  const reduced = useReducedMotion()
+  const reduced = useReducedMotion();
 
   return (
     <div
       className="pointer-events-none absolute inset-x-0 bottom-0 z-20 flex justify-center"
-      style={{ paddingBottom: 'calc(1.5rem + env(safe-area-inset-bottom))' }}
+      style={{ paddingBottom: "calc(1.5rem + env(safe-area-inset-bottom))" }}
     >
       <div className="flex flex-col items-center gap-2">
         <span className="text-ink-faint text-[0.625rem] tracking-[0.3em] uppercase">
@@ -190,7 +193,9 @@ function ScrollHint() {
           fill="none"
           aria-hidden="true"
           style={
-            reduced ? undefined : { animation: 'drift-down 2.4s var(--ease-velvet) infinite' }
+            reduced
+              ? undefined
+              : { animation: "drift-down 2.4s var(--ease-velvet) infinite" }
           }
         >
           <path
@@ -204,5 +209,5 @@ function ScrollHint() {
         </svg>
       </div>
     </div>
-  )
+  );
 }

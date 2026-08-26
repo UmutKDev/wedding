@@ -1,4 +1,4 @@
-# Ömer & Burcu — Dijital Düğün Davetiyesi
+# Burcu & Ömer — Dijital Düğün Davetiyesi
 
 Tamamen statik, kendi kendine yeten bir React davetiyesi. Backend yok,
 veritabanı yok, abonelik yok — `dist/` klasörü herhangi bir statik hosting'e

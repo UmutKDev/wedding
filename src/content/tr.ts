@@ -7,110 +7,110 @@
 export const tr = {
   // ── Yükleme & açılış ────────────────────────────────────────────────
   loading: {
-    preparing: 'Hazırlanıyor',
+    preparing: "Hazırlanıyor",
   },
   envelope: {
-    eyebrow: 'Davetiyeniz hazır',
-    open: 'Davetiyeyi Aç',
-    hint: 'Ses açık olacak',
+    eyebrow: "Davetiyeniz hazır",
+    open: "Davetiyeyi Aç",
+    hint: "Ses açık olacak",
   },
   intro: {
-    skip: 'Atla',
-    replay: 'Açılışı tekrar izle',
+    skip: "Atla",
+    replay: "Açılışı tekrar izle",
   },
 
   // ── Hero ────────────────────────────────────────────────────────────
   hero: {
-    eyebrow: 'Evleniyoruz',
-    and: '&',
-    scroll: 'Kaydırın',
+    eyebrow: "Evleniyoruz",
+    and: "&",
+    scroll: "Kaydırın",
   },
 
   // ── Geri sayım ──────────────────────────────────────────────────────
   countdown: {
-    eyebrow: 'Büyük güne',
-    days: 'Gün',
-    hours: 'Saat',
-    minutes: 'Dakika',
-    seconds: 'Saniye',
+    eyebrow: "Büyük güne",
+    days: "Gün",
+    hours: "Saat",
+    minutes: "Dakika",
+    seconds: "Saniye",
     /** Tarih geçtikten sonra */
-    marriedTitle: 'Evlendik',
-    marriedSince: 'Birlikte geçen gün',
-    today: 'Bugün o gün',
+    marriedTitle: "Evlendik",
+    marriedSince: "Birlikte geçen gün",
+    today: "Bugün o gün",
   },
 
   // ── Detaylar / takvim ───────────────────────────────────────────────
   details: {
-    eyebrow: 'Ne zaman, nerede',
-    title: 'Düğünümüz',
-    addToCalendar: 'Takvime Ekle',
-    addToCalendarApple: 'Takvim dosyası (.ics)',
-    addToCalendarGoogle: 'Google Takvim',
-    calendarAdded: 'Takvime eklendi',
+    eyebrow: "Ne zaman, nerede",
+    title: "Düğünümüz",
+    addToCalendar: "Takvime Ekle",
+    addToCalendarApple: "Takvim dosyası (.ics)",
+    addToCalendarGoogle: "Google Takvim",
+    calendarAdded: "Takvime eklendi",
   },
 
   // ── Mekân ───────────────────────────────────────────────────────────
   venue: {
-    directions: 'Yol Tarifi',
+    directions: "Yol Tarifi",
     // Kısa tutuluyor: üstteki "Yol Tarifi" başlığı bağlamı zaten veriyor
     // ve üç düğme telefonda tek satıra sığıyor.
-    google: 'Google',
-    apple: 'Apple',
-    yandex: 'Yandex',
-    copyAddress: 'Adresi kopyala',
-    copied: 'Kopyalandı',
-    mapLabel: 'harita üzerindeki konumu',
+    google: "Google",
+    apple: "Apple",
+    yandex: "Yandex",
+    copyAddress: "Adresi kopyala",
+    copied: "Kopyalandı",
+    mapLabel: "harita üzerindeki konumu",
   },
 
   storyFilm: {
-    eyebrow: 'Kısa film',
-    title: 'Bizden Bir Parça',
-    play: 'Oynat',
-    pause: 'Duraklat',
-    mute: 'Sesi kapat',
-    unmute: 'Sesi aç',
-    fullscreen: 'Tam ekran',
-    exitFullscreen: 'Tam ekrandan çık',
-    unavailable: 'Video yakında burada olacak',
+    eyebrow: "Kısa film",
+    title: "Bizden Bir Parça",
+    play: "Oynat",
+    pause: "Duraklat",
+    mute: "Sesi kapat",
+    unmute: "Sesi aç",
+    fullscreen: "Tam ekran",
+    exitFullscreen: "Tam ekrandan çık",
+    unavailable: "Video yakında burada olacak",
   },
   reel: {
-    eyebrow: 'Bir bakışta',
-    title: 'Anlarımız',
+    eyebrow: "Bir bakışta",
+    title: "Anlarımız",
   },
 
   // ── Galeri ──────────────────────────────────────────────────────────
   gallery: {
-    eyebrow: 'Anılar',
-    title: 'Bizden Kareler',
-    close: 'Kapat',
-    prev: 'Önceki fotoğraf',
-    next: 'Sonraki fotoğraf',
+    eyebrow: "Anılar",
+    title: "Bizden Kareler",
+    close: "Kapat",
+    prev: "Önceki fotoğraf",
+    next: "Sonraki fotoğraf",
     counter: (i: number, total: number) => `${i} / ${total}`,
   },
 
   // ── Kapanış ─────────────────────────────────────────────────────────
   closing: {
-    line1: 'Bu güzel günde',
-    line2: 'sizleri de aramızda görmek isteriz',
-    share: 'Davetiyeyi Paylaş',
-    shareTitle: 'Ömer & Burcu — Evleniyoruz',
-    shareText: 'Düğünümüze davetlisiniz 🤍',
-    linkCopied: 'Bağlantı kopyalandı',
-    contact: 'İletişim',
+    line1: "Bu güzel günde",
+    line2: "sizleri de aramızda görmek isteriz",
+    share: "Davetiyeyi Paylaş",
+    shareTitle: "Burcu & Ömer — Evleniyoruz",
+    shareText: "Düğünümüze davetlisiniz 🤍",
+    linkCopied: "Bağlantı kopyalandı",
+    contact: "İletişim",
   },
 
   // ── Ses ─────────────────────────────────────────────────────────────
   audio: {
-    on: 'Müziği kapat',
-    off: 'Müziği aç',
+    on: "Müziği kapat",
+    off: "Müziği aç",
   },
 
   // ── Hata / fallback ─────────────────────────────────────────────────
   fallback: {
-    webglTitle: 'Ömer & Burcu',
+    webglTitle: "Burcu & Ömer",
     webglText:
-      'Cihazınız 3B görüntülemeyi desteklemiyor, ancak davetiyenin tamamını aşağıda görebilirsiniz.',
+      "Cihazınız 3B görüntülemeyi desteklemiyor, ancak davetiyenin tamamını aşağıda görebilirsiniz.",
   },
-} as const
+} as const;
 
-export type Copy = typeof tr
+export type Copy = typeof tr;

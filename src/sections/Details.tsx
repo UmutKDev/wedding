@@ -2,7 +2,7 @@ import { AddToCalendar } from '../components/AddToCalendar'
 import { Reveal } from '../components/Reveal'
 import { SectionShell } from '../components/SectionShell'
 import { VenueCard } from './Venue'
-import { wedding } from '../config/wedding'
+import { coupleOrder, wedding } from '../config/wedding'
 import { tr } from '../content/tr'
 import { dateParts, formatTime } from '../lib/format'
 import { fullAddress } from '../lib/maps'
@@ -33,11 +33,11 @@ export function Details() {
   ])
 
   const wholeDay: CalendarEvent = {
-    title: `${wedding.couple.groom.first} & ${wedding.couple.bride.first} — Düğün`,
+    title: `${coupleOrder[0].first} & ${coupleOrder[1].first} — Düğün`,
     startsAt: new Date(Math.min(...times)).toISOString(),
     endsAt: new Date(Math.max(...times)).toISOString(),
     location: address,
-    description: `${wedding.couple.groom.first} ve ${wedding.couple.bride.first}'ın düğününe davetlisiniz.`,
+    description: `${coupleOrder[0].first} ve ${coupleOrder[1].first}'ın düğününe davetlisiniz.`,
     url: wedding.siteUrl,
   }
 
